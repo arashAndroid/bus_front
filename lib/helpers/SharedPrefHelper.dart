@@ -21,13 +21,16 @@ Future<bool> setLoggedIn(
 
 Future<bool> getIsFirst() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool isLoggedIn = prefs.getBool('isFirst') == null
-      ? false
-      : prefs.getBool('isFirst') as bool;
-  return isLoggedIn;
+  bool isFirst;
+  if (prefs.getBool('isFirst') == null) {
+    isFirst = true;
+  } else {
+    isFirst = prefs.getBool('isFirst');
+  }
+  return isFirst;
 }
 
-Future<bool> setIsFirst(String name, String token) async {
+Future<bool> setIsFirst() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setBool('isFirst', true);
   return true;
@@ -35,8 +38,11 @@ Future<bool> setIsFirst(String name, String token) async {
 
 Future<String> getToken() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String phone = prefs.getString('accessToken') == null
-      ? ' '
-      : prefs.getString('accessToken') as String;
+  String phone;
+  if (prefs.getString('accessToken') == null) {
+    phone = ' ';
+  } else {
+    phone = prefs.getString('accessToken');
+  }
   return phone;
 }

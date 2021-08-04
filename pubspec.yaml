@@ -88,3 +88,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Sans
+      fonts:
+        - asset: fonts/Sans-Regular.ttf
+        - asset: fonts/Sans-Bold.ttf
+          weight: 500
+
