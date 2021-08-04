@@ -1,0 +1,42 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
+Future<bool> getLoggedIn() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isLoggedIn = prefs.getBool('isLoggedIn') == null
+      ? false
+      : prefs.getBool('isLoggedIn') as bool;
+  return isLoggedIn;
+}
+
+Future<bool> setLoggedIn(
+    String username, String email, int cash, String token) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('username', username);
+  prefs.setString('email', email);
+  prefs.setInt('cash', cash);
+  prefs.setString('accessToken', token);
+  prefs.setBool('isLoggedIn', true);
+  return true;
+}
+
+Future<bool> getIsFirst() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isLoggedIn = prefs.getBool('isFirst') == null
+      ? false
+      : prefs.getBool('isFirst') as bool;
+  return isLoggedIn;
+}
+
+Future<bool> setIsFirst(String name, String token) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool('isFirst', true);
+  return true;
+}
+
+Future<String> getToken() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String phone = prefs.getString('accessToken') == null
+      ? ' '
+      : prefs.getString('accessToken') as String;
+  return phone;
+}

@@ -16,7 +16,7 @@ void main() => runApp(
     );
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, this.initialAuthServiceType = AuthServiceType.real})
+  const MyApp({Key key, this.initialAuthServiceType = AuthServiceType.real})
       : super(key: key);
   final AuthServiceType initialAuthServiceType;
 
@@ -42,11 +42,14 @@ class MyApp extends StatelessWidget {
           onGenerateRoute: (RouteSettings settings) {
             switch (settings.name) {
               case '/MainView':
-                return MaterialPageRoute(builder: (context) => MainView());
+                return MaterialPageRoute(
+                    builder: (context) => const MainView());
               case '/LoginView':
-                return MaterialPageRoute(builder: (context) => LoginView());
+                return MaterialPageRoute(
+                    builder: (context) => const LoginView());
               default:
-                return MaterialPageRoute(builder: (context) => MainView());
+                return MaterialPageRoute(
+                    builder: (context) => const MainView());
             }
           },
           home: const SplashView(),

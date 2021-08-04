@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MainView extends StatefulWidget {
-  const MainView({Key? key}) : super(key: key);
+  const MainView({Key key}) : super(key: key);
 
   @override
   _MainViewState createState() => _MainViewState();

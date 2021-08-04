@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({Key key}) : super(key: key);
 
   @override
   _LoginViewState createState() => _LoginViewState();
