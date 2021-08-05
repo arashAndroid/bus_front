@@ -32,7 +32,7 @@ Future<bool> getIsFirst() async {
 
 Future<bool> setIsFirst() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setBool('isFirst', true);
+  prefs.setBool('isFirst', false);
   return true;
 }
 

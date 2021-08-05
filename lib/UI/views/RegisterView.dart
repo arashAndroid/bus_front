@@ -2,29 +2,29 @@ import 'package:bus/helpers/Constants.dart';
 import 'package:bus/helpers/background.dart';
 import 'package:flutter/material.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({Key key}) : super(key: key);
-
+class RegisterView extends StatefulWidget {
+  const RegisterView({Key key}) : super(key: key);
   @override
-  _LoginViewState createState() => _LoginViewState();
+  _RegisterViewState createState() => _RegisterViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: Background(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: <Widget>[
               Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: const Text(
-                  "ورود",
+                  "ثبت‌نام",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: colorRedorange,
@@ -38,6 +38,14 @@ class _LoginViewState extends State<LoginView> {
                 margin: const EdgeInsets.symmetric(horizontal: 40),
                 child: const TextField(
                   decoration: InputDecoration(labelText: "نام کاربری"),
+                ),
+              ),
+              SizedBox(height: size.height * 0.03),
+              Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.symmetric(horizontal: 40),
+                child: const TextField(
+                  decoration: InputDecoration(labelText: "ایمیل"),
                 ),
               ),
               SizedBox(height: size.height * 0.03),
@@ -70,7 +78,7 @@ class _LoginViewState extends State<LoginView> {
                             colors: [colorRedorange, colorLightred])),
                     padding: const EdgeInsets.all(0),
                     child: const Text(
-                      "ورود",
+                      "ثبت‌نام",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
@@ -82,9 +90,9 @@ class _LoginViewState extends State<LoginView> {
                 margin:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: GestureDetector(
-                  onTap: () => {Navigator.pushNamed(context, '/RegisterView')},
+                  onTap: () => {Navigator.pushNamed(context, '/LoginView')},
                   child: const Text(
-                    "ثبت‌نام نکرده‌اید؟ ثبت‌نام کنید",
+                    "قبلا ثبت‌نام کرده‌اید؟ وارد شوید",
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,

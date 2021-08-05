@@ -11,3 +11,7 @@ const Color colorBalticsea = Color(0xFF3d3d3d);
 const Color colorBiscay = Color(0xFF303952);
 const Color colorShadowedsteel = Color(0xFF4b4b4b);
 const Color colorLightblue = Color(0xFF91AA9D);
+
+const Color colorBackgroundCurves = Color(0xFF91AA9D); // colorLightblue
+
+

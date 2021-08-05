@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bus/UI/views/MainView.dart';
 import 'package:bus/core/viewmodels/SplashViewModel.dart';
 import 'package:bus/helpers/AnimationHandler.dart';
@@ -29,7 +31,9 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Consumer<SplashViewModel>(
-        builder: (_, splashConsumer, __) => getPage(splashConsumer));
+        builder: (_, splashConsumer, __) => splashConsumer.isLoaded
+            ? getPage(splashConsumer)
+            : const Scaffold());
   }
 
   Widget _buildImage(String assetName, [double width = 350]) {
@@ -38,6 +42,7 @@ class _SplashViewState extends State<SplashView> {
 
   void _onIntroEnd(context) {
     setIsFirst().then((value) {
+      print('set is first');
       Navigator.of(context).pushNamed('/LoginView');
     });
   }
@@ -106,14 +111,24 @@ class _SplashViewState extends State<SplashView> {
   }
 
   Widget splashScreen() {
+    Timer(const Duration(seconds: 3), () {
+      if (splashViewModel.isLoggedIn) {
+        Navigator.of(context).pushNamed('/MainView');
+      } else {
+        Navigator.of(context).pushNamed('/LoginView');
+      }
+    });
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(64),
         child: AnimationHandler().popUp(
-          const Image(
-            image: AssetImage('images/icon.png'),
-            height: 75,
+          const Hero(
+            tag: 'busIcon',
+            child: Image(
+              image: AssetImage('images/icon.png'),
+              height: 75,
+            ),
           ),
           Curves.elasticOut,
           0,
