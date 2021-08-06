@@ -42,7 +42,6 @@ class _SplashViewState extends State<SplashView> {
 
   void _onIntroEnd(context) {
     setIsFirst().then((value) {
-      print('set is first');
       Navigator.of(context).pushNamed('/LoginView');
     });
   }

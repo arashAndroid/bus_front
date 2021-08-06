@@ -14,4 +14,4 @@ const Color colorLightblue = Color(0xFF91AA9D);
 
 const Color colorBackgroundCurves = Color(0xFF91AA9D); // colorLightblue
 
-
+const String baseUrl = '192.168.1.100:8085';

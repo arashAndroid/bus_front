@@ -19,6 +19,16 @@ Future<bool> setLoggedIn(
   return true;
 }
 
+Future<bool> setLoggedOut() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('username', '');
+  prefs.setString('email', '');
+  prefs.setInt('cash', 0);
+  prefs.setString('accessToken', '');
+  prefs.setBool('isLoggedIn', false);
+  return true;
+}
+
 Future<bool> getIsFirst() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirst;
