@@ -30,28 +30,34 @@ class LoginViewModel with ChangeNotifier {
     WebService()
         .signin(_usernameController.text, _passwordController.text)
         .then((response) {
-      final bodyResponse = json.decode(response.body);
-      String status = bodyResponse['status'];
-      print(bodyResponse);
-      switch (status) {
-        case "200":
-          final bodyResponse = json.decode(response.body);
-          final data = bodyResponse['data'];
-          _isLoading = false;
-          notifyListeners();
-          setLoggedIn(data['userName'], data['email'], data['credit'] ?? 0,
-                  data['accessToken'])
-              .then((value) {
-            Navigator.of(context).pushNamed('/MainView');
-          });
-          return true;
-          break;
+      if (response.statusCode == 500) {
+        _isLoading = false;
+        notifyListeners();
+        EasyLoading.showInfo('خطای ارتباط با سرور');
+      } else {
+        final bodyResponse = json.decode(response.body);
+        String status = bodyResponse['status'];
+        print(bodyResponse);
+        switch (status) {
+          case "200":
+            final bodyResponse = json.decode(response.body);
+            final data = bodyResponse['data'];
+            _isLoading = false;
+            notifyListeners();
+            setLoggedIn(data['id'], data['userName'], data['email'],
+                    data['credit'] ?? 0, data['accessToken'])
+                .then((value) {
+              Navigator.of(context).pushNamed('/MainView');
+            });
+            return true;
+            break;
 
-        default:
-          _isLoading = false;
-          notifyListeners();
-          EasyLoading.showInfo(bodyResponse['message'] ?? 'خطای سرور');
-          return false;
+          default:
+            _isLoading = false;
+            notifyListeners();
+            EasyLoading.showInfo(bodyResponse['message'] ?? 'خطای سرور');
+            return false;
+        }
       }
     });
   }

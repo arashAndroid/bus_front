@@ -110,7 +110,7 @@ class _SplashViewState extends State<SplashView> {
   }
 
   Widget splashScreen() {
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 2), () {
       if (splashViewModel.isLoggedIn) {
         Navigator.of(context).pushNamed('/MainView');
       } else {

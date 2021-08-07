@@ -13,5 +13,15 @@ const Color colorShadowedsteel = Color(0xFF4b4b4b);
 const Color colorLightblue = Color(0xFF91AA9D);
 
 const Color colorBackgroundCurves = Color(0xFF91AA9D); // colorLightblue
+const Color colorTextPrimary = Color(0xFF3d3d3d); // colorBalticsea
+const Color colorTextSub = Color(0xFF303952); // colorBiscay
+const Color colorTextWhite = Color(0xFFffffff); // colorWhite
+const Color colorPrimary = Color(0xFFff3838); // colorRedorange
+const Color colorDanger = Color(0xFFff4d4d); // colorLightred
+const Color colorDeactivated = Color(0xFFD1DBBD); // colorSeagray
+const Color colorPrimaryGrey = Color(0xFF91AA9D); // colorLightblue
 
-const String baseUrl = '192.168.1.100:8085';
+const String baseUrl = 'http://192.168.1.181:8085';
+
+const double fontSizeTitle = 20;
+const double fontSizeSubTitle = 17;

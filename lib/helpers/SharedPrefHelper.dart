@@ -1,16 +1,25 @@
+import 'package:bus/core/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<bool> getLoggedIn() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool isLoggedIn = prefs.getBool('isLoggedIn') == null
-      ? false
-      : prefs.getBool('isLoggedIn') as bool;
+  bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
   return isLoggedIn;
 }
 
-Future<bool> setLoggedIn(
-    String username, String email, int cash, String token) async {
+Future<User> getUser() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  return User(
+      id: prefs.getInt('id'),
+      username: prefs.getString('username'),
+      email: prefs.getString('email'),
+      cash: prefs.getInt('cash'));
+}
+
+Future<bool> setLoggedIn(
+    int id, String username, String email, int cash, String token) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setInt('id', id);
   prefs.setString('username', username);
   prefs.setString('email', email);
   prefs.setInt('cash', cash);
