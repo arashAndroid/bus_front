@@ -34,7 +34,9 @@ class ExitDialog extends Dialog {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 MaterialButton(
-                  onPressed: () => setLoggedOut(),
+                  onPressed: () => setLoggedOut().then((value) =>
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/LoginView', (route) => false)),
                   key: const Key('exitBtn'),
                   child: const Text(
                     'خروج',

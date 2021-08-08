@@ -24,7 +24,7 @@ Widget drawerItem({String title, IconData icon}) {
           title ?? " ",
           style: const TextStyle(
               color: colorTextSub,
-              fontSize: fontSizeTitle,
+              fontSize: fontSizeSubTitle,
               fontWeight: FontWeight.bold),
         )
       ],

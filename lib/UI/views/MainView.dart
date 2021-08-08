@@ -607,7 +607,9 @@ class _MainViewState extends State<MainView> {
                                           child: Consumer<MainViewModel>(
                                             builder: (_, mainVM, __) => InkWell(
                                               key: const Key('searchButton'),
-                                              onTap: () async {},
+                                              onTap: () async {
+                                                mainVM.getResults(context);
+                                              },
                                               child: Container(
                                                 width: (12 + 35 + 12) * 1.0,
                                                 padding: const EdgeInsets.only(

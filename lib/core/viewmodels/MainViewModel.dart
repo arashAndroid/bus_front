@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bus/core/models/Travel.dart';
 import 'package:bus/core/models/User.dart';
 import 'package:bus/core/services/WebService.dart';
 import 'package:bus/helpers/Constants.dart';
@@ -7,11 +8,14 @@ import 'package:bus/helpers/SharedPrefHelper.dart';
 import 'package:bus/helpers/helperFunctions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 // import 'package:persian_date/persian_date.dart';
 import 'package:persian_datepicker/persian_datepicker.dart';
 import 'package:jalali_calendar/jalali_calendar.dart';
 
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
+
 import 'package:http/http.dart' as http;
 
 class MainViewModel with ChangeNotifier {
@@ -256,7 +260,7 @@ class MainViewModel with ChangeNotifier {
     ).init();
     // _currentDateController.text = 'انتخاب تاریخ';
     _loading = true;
-    setTodayDate();
+    // setTodayDate();
 
     getDestinationTownShip().then((result) {
       if (result) {
@@ -270,30 +274,15 @@ class MainViewModel with ChangeNotifier {
   }
 
   void setGregorianDate() {
-    print("setGregorianDate");
     print("_currentDateController test = ${_currentDateController.text}");
-    try {
-      // String s = _currentDateController.text.substring(0, 4);
-      // print("s = $s");
+    List<String> dateComponents = _currentDateController.text.split('/');
 
-      currentYear = int.parse(
-          convertNumbers(_currentDateController.text.substring(0, 4)));
-    } on Exception catch (e) {
-      currentYear = int.parse(_currentDate.substring(0, 4));
-    }
-    try {
-      currentMonth = int.parse(
-          convertNumbers(_currentDateController.text.substring(5, 7)));
-    } on Exception catch (e) {
-      currentMonth = int.parse(_currentDate.substring(5, 7));
-    }
-    try {
-      currentDay = int.parse(
-          convertNumbers(_currentDateController.text.substring(8, 10)));
-      print("day = $currentDay");
-    } on Exception catch (e) {
-      currentDay = int.parse(_currentDate.substring(8, 10));
-    }
+    currentYear = int.parse(convertNumbers(dateComponents[0]));
+
+    currentMonth = int.parse(convertNumbers(dateComponents[1]));
+
+    currentDay = int.parse(convertNumbers(dateComponents[2]));
+
     PersianDate persianDate = PersianDate();
     String month = "$currentMonth", day = "$currentDay";
     if (currentMonth.toString().length < 2) {
@@ -302,21 +291,16 @@ class MainViewModel with ChangeNotifier {
     if (currentDay.toString().length < 2) {
       day = "0$currentDay";
     }
-    this.dateString = "$currentYear-$month-$day 19:54";
-    print('dateString = $dateString');
-    this.dateString = persianDate.jalaliToGregorian(
+    dateString = "$currentYear-$month-$day 19:54";
+    dateString = persianDate.jalaliToGregorian(
         currentYear, int.parse(month), int.parse(day), '-');
+    DateTime date = DateFormat('yyyy-M-D').parse(dateString);
 
-    print('${this.dateString}');
+    print('dateString = $dateString');
+    print('date  = $date');
 
-    this.dateStringRound = persianDate
-        .jalaliToGregorian(currentYear, int.parse(month), int.parse(day), '-')
-        .toString();
-    print('${this.dateStringRound.toString()}');
-    // this.dateString = this.dateString.substring(0, 10);
-    if (authServiceType == AuthServiceType.mock) {
-      this.dateString = "2020-07-19"; //1399/04/29
-    }
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    dateString = formatter.format(date);
     print('dateString geregorian converted  = ${this.dateString}');
   }
 
@@ -394,15 +378,15 @@ class MainViewModel with ChangeNotifier {
       }
     }
     if (currentSource == null || currentDestination == null) {
+      EasyLoading.showInfo('لطفا مبدا و مقصد را وارد کنید');
       return false;
     }
     if (_currentDateController.text == null ||
         _currentDateController.text == '') {
+      EasyLoading.showInfo('لطفا تاریخ را وارد کنید');
       return false;
     }
 
-    notifyListeners();
-    // loading = true;
     setGregorianDate();
     getCapitalCityID(currentSource, true); //128; //
     getCapitalCityID(currentDestination, false); //1018; //
@@ -411,10 +395,24 @@ class MainViewModel with ChangeNotifier {
         "sourceAndDestinationIds $currentSource $currentSourceId $currentDestination $currentDestinationId");
 
     print('date for search result = ${this.dateString}');
-    http.Response result;
-    var resulRound;
+    http.Response response;
     _isSearching = true;
     notifyListeners();
+    response = await WebService()
+        .getTravels(currentSourceId, currentDestinationId, dateString);
+    _isSearching = false;
+    notifyListeners();
+    if (handleResponse(response)) {
+      final bodyResponse = json.decode(response.body);
+
+      List<Travel> travels = bodyResponse["Data"]
+          .map<Travel>((json) => Travel.fromJson(json))
+          .toList();
+
+      print('travel length = ${travels.length}');
+    }
+
+    return false;
   }
 
   ////////////////////////////////////
@@ -451,7 +449,7 @@ class MainViewModel with ChangeNotifier {
       return false;
     }
 
-    if (handleresponse(response)) {
+    if (handleResponse(response)) {
       final bodyResponse = json.decode(response.body);
       var data = bodyResponse["Data"];
       var dataList = data as List;

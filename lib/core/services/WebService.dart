@@ -5,7 +5,7 @@ import 'package:bus/helpers/SharedPrefHelper.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 
-bool handleresponse(http.Response response) {
+bool handleResponse(http.Response response) {
   if (response.statusCode == 500) {
     return false;
   } else {
@@ -80,6 +80,32 @@ class WebService {
 
   Future<http.Response> getAllCities() async {
     final url = Uri.parse(baseUrl + "/api/v1/city");
+    String token = await getToken();
+
+    Map<String, String> header = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "x-access-token": token
+    };
+
+    http.Response response =
+        await http.get(url, headers: header).onError((error, stackTrace) {
+      print(error);
+      print(stackTrace);
+      return http.Response('', 500);
+    }).timeout(const Duration(milliseconds: 5000), onTimeout: () {
+      return http.Response('', 500);
+    });
+    print(response.body);
+
+    return response;
+  }
+
+  Future<http.Response> getTravels(int source, int dest, String date) async {
+    final url = Uri.parse(
+      baseUrl +
+          "/api/v1/travel?destinationId=$dest&sourceId=$source&departureDatetime=${date}T00:00:01",
+    );
+    print(url);
     String token = await getToken();
 
     Map<String, String> header = {
