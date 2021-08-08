@@ -1,4 +1,5 @@
 import 'package:bus/UI/views/RegisterView.dart';
+import 'package:bus/core/viewmodels/ResultViewModel.dart';
 
 import './core/viewmodels/LoginViewModel.dart';
 import './core/viewmodels/SplashViewModel.dart';
@@ -9,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import 'UI/views/LoginView.dart';
 import 'UI/views/MainView.dart';
+import 'UI/views/ResultView.dart';
 import 'UI/views/SplashView.dart';
 import 'core/viewmodels/MainViewModel.dart';
 import 'core/viewmodels/RegisterViewModel.dart';
@@ -39,6 +41,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
               create: (context) =>
                   RegisterViewModel(authServiceType: initialAuthServiceType)),
+          ChangeNotifierProvider(
+              create: (context) =>
+                  ResultViewModel(authServiceType: initialAuthServiceType)),
         ],
         child: MaterialApp(
           theme: ThemeData(
@@ -56,6 +61,9 @@ class MyApp extends StatelessWidget {
               case '/RegisterView':
                 return MaterialPageRoute(
                     builder: (context) => const RegisterView());
+              case '/ResultView':
+                return MaterialPageRoute(
+                    builder: (context) => const ResultView());
               default:
                 return MaterialPageRoute(
                     builder: (context) => const MainView());

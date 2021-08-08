@@ -409,6 +409,12 @@ class MainViewModel with ChangeNotifier {
           .map<Travel>((json) => Travel.fromJson(json))
           .toList();
 
+      if (travels.isEmpty) {
+        EasyLoading.showInfo('اتوبوسی برای این تاریخ وجود ندارد');
+      } else {
+        Navigator.of(context).pushNamed('/ResultView');
+      }
+
       print('travel length = ${travels.length}');
     }
 

@@ -103,7 +103,7 @@ class WebService {
   Future<http.Response> getTravels(int source, int dest, String date) async {
     final url = Uri.parse(
       baseUrl +
-          "/api/v1/travel?destinationId=$dest&sourceId=$source&departureDatetime=${date}T00:00:01",
+          "/api/v1/travel?destinationId=$dest&sourceId=$source&departureDatetime=${date}T11:00:01",
     );
     print(url);
     String token = await getToken();
