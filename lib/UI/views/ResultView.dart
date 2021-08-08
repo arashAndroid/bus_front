@@ -1,4 +1,6 @@
+import 'package:bus/UI/widgets/ResultViewItem.dart';
 import 'package:bus/core/viewmodels/ResultViewModel.dart';
+import 'package:bus/helpers/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,9 +21,31 @@ class _ResultViewState extends State<ResultView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<ResultViewModel>(
-        builder: (_, resultConsumer, __) => Container(),
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        backgroundColor: colorBackground,
+        appBar: AppBar(
+          key: const Key('mainAppBar'),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: const Text(
+            'نتایج جستجو',
+            style: TextStyle(
+              color: colorTextPrimary,
+              fontSize: fontSizeTitle + 2,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          iconTheme: const IconThemeData(color: colorTextPrimary),
+        ),
+        body: Consumer<ResultViewModel>(
+          builder: (_, resultConsumer, __) => ListView.builder(
+              itemCount: resultConsumer.travels.length,
+              itemBuilder: (context, index) => ResultViewItem(
+                    travel: resultConsumer.travels[index],
+                  )),
+        ),
       ),
     );
   }

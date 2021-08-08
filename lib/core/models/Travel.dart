@@ -12,7 +12,8 @@ class Travel {
   bool status;
   Driver driver;
   Bus bus;
-  City city;
+  City source;
+  City destination;
   Travel({
     this.id,
     this.price,
@@ -20,7 +21,8 @@ class Travel {
     this.status,
     this.driver,
     this.bus,
-    this.city,
+    this.source,
+    this.destination,
   });
 
   Travel copyWith({
@@ -30,7 +32,8 @@ class Travel {
     bool status,
     Driver driver,
     Bus bus,
-    City city,
+    City source,
+    City destination,
   }) {
     return Travel(
       id: id ?? this.id,
@@ -39,7 +42,8 @@ class Travel {
       status: status ?? this.status,
       driver: driver ?? this.driver,
       bus: bus ?? this.bus,
-      city: city ?? this.city,
+      source: source ?? this.source,
+      destination: destination ?? this.destination,
     );
   }
 
@@ -51,7 +55,8 @@ class Travel {
       'status': status,
       'driver': driver.toMap(),
       'bus': bus.toMap(),
-      'city': city.toMap(),
+      'source': source.toMap(),
+      'destination': destination.toMap(),
     };
   }
 
@@ -63,7 +68,8 @@ class Travel {
       status: map['status'] == 1,
       driver: Driver.fromMap(map['driver']),
       bus: Bus.fromMap(map['bus']),
-      city: City.fromMap(map['city']),
+      source: City.fromMap(map['source']),
+      destination: City.fromMap(map['destination']),
     );
   }
 
@@ -73,7 +79,7 @@ class Travel {
 
   @override
   String toString() {
-    return 'Travel(id: $id, price: $price, departureDatetime: $departureDatetime, status: $status, driver: $driver, bus: $bus, city: $city)';
+    return 'Travel(id: $id, price: $price, departureDatetime: $departureDatetime, status: $status, driver: $driver, bus: $bus, source: $source, destination: $destination)';
   }
 
   @override
@@ -87,7 +93,8 @@ class Travel {
         other.status == status &&
         other.driver == driver &&
         other.bus == bus &&
-        other.city == city;
+        other.source == source &&
+        other.destination == destination;
   }
 
   @override
@@ -98,6 +105,7 @@ class Travel {
         status.hashCode ^
         driver.hashCode ^
         bus.hashCode ^
-        city.hashCode;
+        source.hashCode ^
+        destination.hashCode;
   }
 }

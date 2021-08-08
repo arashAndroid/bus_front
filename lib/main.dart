@@ -1,20 +1,19 @@
 import 'package:bus/UI/views/RegisterView.dart';
 import 'package:bus/core/viewmodels/ResultViewModel.dart';
 
-import './core/viewmodels/LoginViewModel.dart';
-import './core/viewmodels/SplashViewModel.dart';
-import './helpers/SharedPrefHelper.dart';
+import 'package:bus/core/viewmodels/LoginViewModel.dart';
+import 'package:bus/core/viewmodels/SplashViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
-import 'UI/views/LoginView.dart';
-import 'UI/views/MainView.dart';
-import 'UI/views/ResultView.dart';
-import 'UI/views/SplashView.dart';
-import 'core/viewmodels/MainViewModel.dart';
-import 'core/viewmodels/RegisterViewModel.dart';
-import 'helpers/Constants.dart';
+import 'package:bus/UI/views/LoginView.dart';
+import 'package:bus/UI/views/MainView.dart';
+import 'package:bus/UI/views/ResultView.dart';
+import 'package:bus/UI/views/SplashView.dart';
+import 'package:bus/core/viewmodels/MainViewModel.dart';
+import 'package:bus/core/viewmodels/RegisterViewModel.dart';
+import 'package:bus/helpers/Constants.dart';
 
 void main() => runApp(
       const MyApp(initialAuthServiceType: AuthServiceType.real),

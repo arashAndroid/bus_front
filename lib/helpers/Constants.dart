@@ -20,9 +20,12 @@ const Color colorPrimary = Color(0xFFff3838); // colorRedorange
 const Color colorDanger = Color(0xFFff4d4d); // colorLightred
 const Color colorDeactivated = Color(0xFFD1DBBD); // colorSeagray
 const Color colorPrimaryGrey = Color(0xFF91AA9D); // colorLightblue
+const Color colorSource = Color(0xFFffb965); //
+const Color colorDestination = Color(0xFF9094fb); //
+const Color colorBackground = Color(0xFFfbfbfb); //
 
 const String baseUrl = 'http://192.168.1.102:8085';
 
 const double fontSizeTitle = 17;
 const double fontSizeSubTitle = 15;
-const double fontSizeSub = 14;
+const double fontSizeSub = 13;

@@ -42,7 +42,8 @@ class _SplashViewState extends State<SplashView> {
 
   void _onIntroEnd(context) {
     setIsFirst().then((value) {
-      Navigator.of(context).pushNamed('/LoginView');
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/LoginView', (route) => false);
     });
   }
 
@@ -112,9 +113,11 @@ class _SplashViewState extends State<SplashView> {
   Widget splashScreen() {
     Timer(const Duration(seconds: 2), () {
       if (splashViewModel.isLoggedIn) {
-        Navigator.of(context).pushNamed('/MainView');
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/MainView', (route) => false);
       } else {
-        Navigator.of(context).pushNamed('/LoginView');
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/LoginView', (route) => false);
       }
     });
     return Scaffold(

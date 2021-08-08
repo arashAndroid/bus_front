@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bus/core/models/Travel.dart';
 import 'package:bus/core/models/User.dart';
 import 'package:bus/core/services/WebService.dart';
+import 'package:bus/core/viewmodels/ResultViewModel.dart';
 import 'package:bus/helpers/Constants.dart';
 import 'package:bus/helpers/SharedPrefHelper.dart';
 import 'package:bus/helpers/helperFunctions.dart';
@@ -412,6 +413,9 @@ class MainViewModel with ChangeNotifier {
       if (travels.isEmpty) {
         EasyLoading.showInfo('اتوبوسی برای این تاریخ وجود ندارد');
       } else {
+        ResultViewModel resultViewModel =
+            Provider.of<ResultViewModel>(context, listen: false);
+        resultViewModel.travels = travels;
         Navigator.of(context).pushNamed('/ResultView');
       }
 

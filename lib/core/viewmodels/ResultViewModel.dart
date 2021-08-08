@@ -5,6 +5,6 @@ import 'package:flutter/material.dart';
 class ResultViewModel with ChangeNotifier {
   final AuthServiceType authServiceType;
   ResultViewModel({this.authServiceType = AuthServiceType.real});
-  List<Travel> _travels = [];
-  List<Travel> get travels => _travels;
+  List<Travel> travels = [];
+  // List<Travel> get travels => _travels;
 }

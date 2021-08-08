@@ -38,7 +38,7 @@ class _MainViewState extends State<MainView> {
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: colorBackground,
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
             key: const Key('mainAppBar'),
