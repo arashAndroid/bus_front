@@ -3,6 +3,7 @@ import 'package:bus/core/viewmodels/ResultViewModel.dart';
 
 import 'package:bus/core/viewmodels/LoginViewModel.dart';
 import 'package:bus/core/viewmodels/SplashViewModel.dart';
+import 'package:bus/core/viewmodels/TicketViewModel.dart';
 import 'package:bus/core/viewmodels/TravelViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -16,6 +17,7 @@ import 'package:bus/core/viewmodels/MainViewModel.dart';
 import 'package:bus/core/viewmodels/RegisterViewModel.dart';
 import 'package:bus/helpers/Constants.dart';
 
+import 'UI/views/TicketView.dart';
 import 'UI/views/TravelView.dart';
 
 void main() => runApp(
@@ -49,6 +51,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
               create: (context) =>
                   TravelViewModel(authServiceType: initialAuthServiceType)),
+          ChangeNotifierProvider(
+              create: (context) =>
+                  TicketViewModel(authServiceType: initialAuthServiceType)),
         ],
         child: MaterialApp(
           theme: ThemeData(
@@ -72,6 +77,9 @@ class MyApp extends StatelessWidget {
               case '/TravelView':
                 return MaterialPageRoute(
                     builder: (context) => const TravelView());
+              case '/TicketView':
+                return MaterialPageRoute(
+                    builder: (context) => const TicketView());
               default:
                 return MaterialPageRoute(
                     builder: (context) => const MainView());

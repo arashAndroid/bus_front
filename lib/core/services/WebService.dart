@@ -125,4 +125,31 @@ class WebService {
 
     return response;
   }
+
+  Future<http.Response> postTicket(
+      String qrCode, int travelId, int userId) async {
+    final url = Uri.parse(baseUrl + "/api/v1/ticket");
+
+    Map<String, String> header = {
+      "Content-Type": "application/json; charset=UTF-8"
+    };
+    Map data = {
+      "qrCode": qrCode,
+      "travelId": travelId,
+      "userId": userId,
+    };
+
+    var body = json.encode(data);
+    http.Response response = await http
+        .post(url, headers: header, body: body)
+        .onError((error, stackTrace) {
+      print(error);
+      print(stackTrace);
+      return http.Response('', 500);
+    }).timeout(const Duration(milliseconds: 5000), onTimeout: () {
+      return http.Response('', 500);
+    });
+
+    return response;
+  }
 }

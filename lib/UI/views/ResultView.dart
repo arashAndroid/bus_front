@@ -1,5 +1,6 @@
 import 'package:bus/UI/widgets/ResultViewItem.dart';
 import 'package:bus/core/viewmodels/ResultViewModel.dart';
+import 'package:bus/helpers/AnimationHandler.dart';
 import 'package:bus/helpers/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,9 +43,13 @@ class _ResultViewState extends State<ResultView> {
         body: Consumer<ResultViewModel>(
           builder: (_, resultConsumer, __) => ListView.builder(
               itemCount: resultConsumer.travels.length,
-              itemBuilder: (context, index) => ResultViewItem(
-                    travel: resultConsumer.travels[index],
-                  )),
+              itemBuilder: (context, index) =>
+                  AnimationHandler().translateFromRight(
+                      ResultViewItem(
+                        travel: resultConsumer.travels[index],
+                      ),
+                      Curves.easeOutCubic,
+                      index * 200.0)),
         ),
       ),
     );

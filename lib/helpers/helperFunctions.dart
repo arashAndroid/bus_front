@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:shamsi_date/shamsi_date.dart';
 
 import 'package:persian_datepicker/persian_datepicker.dart';
@@ -17,6 +19,11 @@ String convertTojalali(String dateTimeGregorian) {
   var jalaliDate = '${g2j1.year}/${g2j1.month}/${g2j1.day}';
 
   return jalaliDate;
+}
+
+randomQrCode(min, max) {
+  var rn = Random();
+  return min + rn.nextInt(max - min);
 }
 
 String convertNumbers(String str) {

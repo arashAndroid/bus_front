@@ -164,23 +164,34 @@ class ResultViewItem extends StatelessWidget {
                 const Spacer(),
                 Hero(
                   tag: 'price' + travel.id.toString(),
-                  child: Text(
-                    travel.price.toString(),
-                    style: const TextStyle(
-                        color: colorTextPrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: fontSizeTitle),
-                  ),
-                ),
-                const SizedBox(width: 2),
-                Hero(
-                  tag: "tooman" + travel.id.toString(),
-                  child: const Text(
-                    'تومان',
-                    style: TextStyle(
-                        color: colorTextSub,
-                        fontWeight: FontWeight.normal,
-                        fontSize: fontSizeSub),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            travel.price.toString(),
+                            textDirection: TextDirection.rtl,
+                            style: const TextStyle(
+                                color: colorTextPrimary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: fontSizeTitle),
+                          ),
+                          const SizedBox(width: 2),
+                          const Text(
+                            'تومان',
+                            textDirection: TextDirection.rtl,
+                            style: TextStyle(
+                                color: colorTextSub,
+                                fontWeight: FontWeight.normal,
+                                fontSize: fontSizeSub),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],

@@ -1,7 +1,10 @@
 import 'package:bus/core/viewmodels/TravelViewModel.dart';
+import 'package:bus/helpers/AnimationHandler.dart';
 import 'package:bus/helpers/Constants.dart';
 import 'package:bus/helpers/MySeparator.dart';
+import 'package:bus/helpers/helperFunctions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 class TravelView extends StatefulWidget {
@@ -12,12 +15,12 @@ class TravelView extends StatefulWidget {
 }
 
 class _TravelViewState extends State<TravelView> {
-  TravelViewModel ticketViewModel;
+  TravelViewModel travelViewModel;
 
   @override
   void initState() {
     super.initState();
-    ticketViewModel = Provider.of<TravelViewModel>(context, listen: false);
+    travelViewModel = Provider.of<TravelViewModel>(context, listen: false);
   }
 
   @override
@@ -44,16 +47,20 @@ class _TravelViewState extends State<TravelView> {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           child: Column(
             children: [
-              const Image(image: AssetImage('images/travel.png'), height: 150),
+              AnimationHandler().translateFromRight(
+                  const Image(
+                      image: AssetImage('images/travel.png'), height: 150),
+                  Curves.easeOutCubic,
+                  0),
               const SizedBox(height: 32),
               Hero(
-                tag: 'cities' + ticketViewModel.travel.id.toString(),
+                tag: 'cities' + travelViewModel.travel.id.toString(),
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: Row(
                     children: [
                       Text(
-                        ticketViewModel.travel.source.title,
+                        travelViewModel.travel.source.title,
                         style: const TextStyle(
                             shadows: [
                               Shadow(
@@ -115,7 +122,7 @@ class _TravelViewState extends State<TravelView> {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        ticketViewModel.travel.destination.title,
+                        travelViewModel.travel.destination.title,
                         style: const TextStyle(
                             shadows: [
                               Shadow(
@@ -134,7 +141,7 @@ class _TravelViewState extends State<TravelView> {
               ),
               const SizedBox(height: 32),
               Hero(
-                tag: 'busType' + ticketViewModel.travel.id.toString(),
+                tag: 'busType' + travelViewModel.travel.id.toString(),
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: Row(
@@ -142,7 +149,7 @@ class _TravelViewState extends State<TravelView> {
                     children: [
                       // const Spacer(),
                       Text(
-                        ticketViewModel.travel.bus.title,
+                        travelViewModel.travel.bus.title,
                         style: const TextStyle(
                             color: colorTextPrimary, fontSize: fontSizeTitle),
                       ),
@@ -152,7 +159,7 @@ class _TravelViewState extends State<TravelView> {
                             color: colorTextSub, fontSize: fontSizeSub),
                       ),
                       Text(
-                        ticketViewModel.travel.bus.busType.title,
+                        travelViewModel.travel.bus.busType.title,
                         style: const TextStyle(
                             color: colorTextPrimary, fontSize: fontSizeTitle),
                       ),
@@ -162,85 +169,123 @@ class _TravelViewState extends State<TravelView> {
                 ),
               ),
               const SizedBox(height: 32),
-              Hero(
-                tag: 'dateTime' + ticketViewModel.travel.id.toString(),
-                child: Text(
-                  ticketViewModel.travel.departureDatetime.substring(11, 16),
-                  style: const TextStyle(
-                      color: colorTextPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeTitle),
-                ),
-              ),
-              const SizedBox(height: 32),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Hero(
-                    tag: 'price' + ticketViewModel.travel.id.toString(),
+                    tag: 'dateTime' + travelViewModel.travel.id.toString(),
                     child: Text(
-                      ticketViewModel.travel.price.toString(),
+                      travelViewModel.travel.departureDatetime
+                          .substring(11, 16),
                       style: const TextStyle(
                           color: colorTextPrimary,
                           fontWeight: FontWeight.bold,
-                          fontSize: fontSizeTitle + 10),
+                          fontSize: fontSizeTitle),
                     ),
                   ),
-                  const SizedBox(width: 2),
-                  Hero(
-                    tag: "tooman" + ticketViewModel.travel.id.toString(),
-                    child: const Text(
-                      'تومان',
-                      style: TextStyle(
-                          color: colorTextSub,
-                          fontWeight: FontWeight.normal,
-                          fontSize: fontSizeSub + 5),
-                    ),
-                  ),
+                  const SizedBox(width: 8),
+                  AnimationHandler().translateFromLeft(
+                      Text(
+                        convertTojalali(
+                            travelViewModel.travel.departureDatetime),
+                        style: const TextStyle(
+                            color: colorTextPrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: fontSizeTitle),
+                      ),
+                      Curves.easeOutCubic,
+                      0),
                 ],
+              ),
+              const SizedBox(height: 32),
+              Hero(
+                tag: 'price' + travelViewModel.travel.id.toString(),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          travelViewModel.travel.price.toString(),
+                          style: const TextStyle(
+                              color: colorTextPrimary,
+                              fontWeight: FontWeight.bold,
+                              fontSize: fontSizeTitle + 10),
+                        ),
+                        const SizedBox(width: 2),
+                        const Text(
+                          'تومان',
+                          style: TextStyle(
+                              color: colorTextSub,
+                              fontWeight: FontWeight.normal,
+                              fontSize: fontSizeSub + 5),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(height: 32),
               Row(
                 children: [
                   const Spacer(),
-                  Expanded(
-                      child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 12),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: colorPrimary,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 3,
-                                  spreadRadius: 1,
-                                  color: Colors.black.withOpacity(0.05))
-                            ]),
-                        child: Row(
-                          children: const [
-                            Text(
-                              'پرداخت',
-                              style: TextStyle(
-                                color: colorTextWhite,
-                                fontSize: fontSizeTitle,
+                  AnimationHandler().translateFromLeft(
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Consumer<TravelViewModel>(
+                            builder: (_, travelButtonConsumer, __) => InkWell(
+                              onTap: () {
+                                travelViewModel.generateTicket(context);
+                              },
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 12),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: colorPrimary,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          blurRadius: 3,
+                                          spreadRadius: 1,
+                                          color: Colors.black.withOpacity(0.05))
+                                    ]),
+                                child: travelButtonConsumer.isLoading
+                                    ? const Center(
+                                        child: SpinKitThreeBounce(
+                                          size: 25,
+                                          color: colorTextSub,
+                                        ),
+                                      )
+                                    : Row(
+                                        children: const [
+                                          Text(
+                                            'پرداخت',
+                                            style: TextStyle(
+                                              color: colorTextWhite,
+                                              fontSize: fontSizeTitle,
+                                            ),
+                                          ),
+                                          SizedBox(width: 8),
+                                          Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: colorTextWhite,
+                                            size: 20,
+                                          )
+                                        ],
+                                      ),
                               ),
                             ),
-                            SizedBox(width: 8),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: colorTextWhite,
-                              size: 20,
-                            )
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ))
+                      Curves.easeOutCubic,
+                      0)
                 ],
               ),
             ],
