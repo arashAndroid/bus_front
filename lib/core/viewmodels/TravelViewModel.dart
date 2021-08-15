@@ -30,6 +30,7 @@ class TravelViewModel with ChangeNotifier {
           TicketViewModel ticketViewModel =
               Provider.of<TicketViewModel>(context, listen: false);
           final bodyResponse = json.decode(response.body);
+          print('response.body = ' + response.body);
           ticketViewModel.ticket = Ticket.fromJson(bodyResponse["Data"]);
           _isLoading = false;
           notifyListeners();

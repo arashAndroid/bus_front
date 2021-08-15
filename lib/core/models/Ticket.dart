@@ -50,7 +50,7 @@ class Ticket {
       qrCode: map['qrCode'],
       createdAt: map['createdAt'],
       user: User.fromMap(map['user']),
-      travelDetail: TravelDetail.fromMap(map['travelDetail']),
+      travelDetail: TravelDetail.fromMap(map['travel_detail']),
     );
   }
 

@@ -77,6 +77,11 @@ class MainViewModel with ChangeNotifier {
   bool _isFirst = true;
   bool get isFirst => _isFirst;
 
+  void setIsFirst(bool value) {
+    _isFirst = value;
+    notifyListeners();
+  }
+
   TextEditingController get sourceController => _sourceController;
   TextEditingController get destinationController => _destinationController;
 
