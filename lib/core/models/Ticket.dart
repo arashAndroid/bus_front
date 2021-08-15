@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'Travel.dart';
+import 'package:bus/core/models/TravelDetail.dart';
+
 import 'User.dart';
 
 class Ticket {
@@ -8,13 +9,13 @@ class Ticket {
   String qrCode;
   String createdAt;
   User user;
-  Travel travel;
+  TravelDetail travelDetail;
   Ticket({
     this.id,
     this.qrCode,
     this.createdAt,
     this.user,
-    this.travel,
+    this.travelDetail,
   });
 
   Ticket copyWith({
@@ -22,14 +23,14 @@ class Ticket {
     String qrCode,
     String createdAt,
     User user,
-    Travel travel,
+    TravelDetail travelDetail,
   }) {
     return Ticket(
       id: id ?? this.id,
       qrCode: qrCode ?? this.qrCode,
       createdAt: createdAt ?? this.createdAt,
       user: user ?? this.user,
-      travel: travel ?? this.travel,
+      travelDetail: travelDetail ?? this.travelDetail,
     );
   }
 
@@ -39,7 +40,7 @@ class Ticket {
       'qrCode': qrCode,
       'createdAt': createdAt,
       'user': user.toMap(),
-      'travel': travel.toMap(),
+      'travelDetail': travelDetail.toMap(),
     };
   }
 
@@ -49,7 +50,7 @@ class Ticket {
       qrCode: map['qrCode'],
       createdAt: map['createdAt'],
       user: User.fromMap(map['user']),
-      travel: Travel.fromMap(map['travel']),
+      travelDetail: TravelDetail.fromMap(map['travelDetail']),
     );
   }
 
@@ -59,7 +60,7 @@ class Ticket {
 
   @override
   String toString() {
-    return 'Ticket(id: $id, qrCode: $qrCode, createdAt: $createdAt, user: $user, travel: $travel)';
+    return 'Ticket(id: $id, qrCode: $qrCode, createdAt: $createdAt, user: $user, travel: $travelDetail)';
   }
 
   @override
@@ -71,7 +72,7 @@ class Ticket {
         other.qrCode == qrCode &&
         other.createdAt == createdAt &&
         other.user == user &&
-        other.travel == travel;
+        other.travelDetail == travelDetail;
   }
 
   @override
@@ -80,6 +81,6 @@ class Ticket {
         qrCode.hashCode ^
         createdAt.hashCode ^
         user.hashCode ^
-        travel.hashCode;
+        travelDetail.hashCode;
   }
 }

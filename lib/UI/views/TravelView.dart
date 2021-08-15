@@ -54,13 +54,13 @@ class _TravelViewState extends State<TravelView> {
                   0),
               const SizedBox(height: 32),
               Hero(
-                tag: 'cities' + travelViewModel.travel.id.toString(),
+                tag: 'cities' + travelViewModel.travelDetail.id.toString(),
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: Row(
                     children: [
                       Text(
-                        travelViewModel.travel.source.title,
+                        travelViewModel.travelDetail.source.title,
                         style: const TextStyle(
                             shadows: [
                               Shadow(
@@ -122,7 +122,7 @@ class _TravelViewState extends State<TravelView> {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        travelViewModel.travel.destination.title,
+                        travelViewModel.travelDetail.destination.title,
                         style: const TextStyle(
                             shadows: [
                               Shadow(
@@ -141,7 +141,7 @@ class _TravelViewState extends State<TravelView> {
               ),
               const SizedBox(height: 32),
               Hero(
-                tag: 'busType' + travelViewModel.travel.id.toString(),
+                tag: 'busType' + travelViewModel.travelDetail.id.toString(),
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: Row(
@@ -149,7 +149,7 @@ class _TravelViewState extends State<TravelView> {
                     children: [
                       // const Spacer(),
                       Text(
-                        travelViewModel.travel.bus.title,
+                        travelViewModel.travelDetail.travel.bus.title,
                         style: const TextStyle(
                             color: colorTextPrimary, fontSize: fontSizeTitle),
                       ),
@@ -159,7 +159,7 @@ class _TravelViewState extends State<TravelView> {
                             color: colorTextSub, fontSize: fontSizeSub),
                       ),
                       Text(
-                        travelViewModel.travel.bus.busType.title,
+                        travelViewModel.travelDetail.travel.bus.busType.title,
                         style: const TextStyle(
                             color: colorTextPrimary, fontSize: fontSizeTitle),
                       ),
@@ -173,9 +173,10 @@ class _TravelViewState extends State<TravelView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Hero(
-                    tag: 'dateTime' + travelViewModel.travel.id.toString(),
+                    tag:
+                        'dateTime' + travelViewModel.travelDetail.id.toString(),
                     child: Text(
-                      travelViewModel.travel.departureDatetime
+                      travelViewModel.travelDetail.departureDatetime
                           .substring(11, 16),
                       style: const TextStyle(
                           color: colorTextPrimary,
@@ -187,7 +188,7 @@ class _TravelViewState extends State<TravelView> {
                   AnimationHandler().translateFromLeft(
                       Text(
                         convertTojalali(
-                            travelViewModel.travel.departureDatetime),
+                            travelViewModel.travelDetail.departureDatetime),
                         style: const TextStyle(
                             color: colorTextPrimary,
                             fontWeight: FontWeight.bold,
@@ -199,7 +200,7 @@ class _TravelViewState extends State<TravelView> {
               ),
               const SizedBox(height: 32),
               Hero(
-                tag: 'price' + travelViewModel.travel.id.toString(),
+                tag: 'price' + travelViewModel.travelDetail.id.toString(),
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
@@ -209,7 +210,7 @@ class _TravelViewState extends State<TravelView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          travelViewModel.travel.price.toString(),
+                          travelViewModel.travelDetail.price.toString(),
                           style: const TextStyle(
                               color: colorTextPrimary,
                               fontWeight: FontWeight.bold,

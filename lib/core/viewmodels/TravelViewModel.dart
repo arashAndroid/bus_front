@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:bus/core/models/Ticket.dart';
-import 'package:bus/core/models/Travel.dart';
+import 'package:bus/core/models/TravelDetail.dart';
 import 'package:bus/core/services/WebService.dart';
 import 'package:bus/core/viewmodels/TicketViewModel.dart';
 import 'package:bus/helpers/Constants.dart';
@@ -14,7 +14,7 @@ class TravelViewModel with ChangeNotifier {
   final AuthServiceType authServiceType;
   TravelViewModel({this.authServiceType = AuthServiceType.real});
 
-  Travel travel;
+  TravelDetail travelDetail;
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -23,7 +23,9 @@ class TravelViewModel with ChangeNotifier {
     notifyListeners();
     String qrCode = randomQrCode(10000, 99999).toString();
     getUser().then((user) {
-      WebService().postTicket(qrCode, travel.id, user.id).then((response) {
+      WebService()
+          .postTicket(qrCode, travelDetail.id, user.id)
+          .then((response) {
         if (handleResponse(response)) {
           TicketViewModel ticketViewModel =
               Provider.of<TicketViewModel>(context, listen: false);

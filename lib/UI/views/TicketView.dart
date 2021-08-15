@@ -89,13 +89,13 @@ class _TicketViewState extends State<TicketView> {
                         0),
                     Hero(
                       tag: 'cities' +
-                          ticketViewModel.ticket.travel.id.toString(),
+                          ticketViewModel.ticket.travelDetail.id.toString(),
                       child: Directionality(
                         textDirection: TextDirection.rtl,
                         child: Row(
                           children: [
                             Text(
-                              ticketViewModel.ticket.travel.source.title,
+                              ticketViewModel.ticket.travelDetail.source.title,
                               style: const TextStyle(
                                   shadows: [
                                     Shadow(
@@ -158,7 +158,8 @@ class _TicketViewState extends State<TicketView> {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              ticketViewModel.ticket.travel.destination.title,
+                              ticketViewModel
+                                  .ticket.travelDetail.destination.title,
                               style: const TextStyle(
                                   shadows: [
                                     Shadow(
@@ -178,7 +179,7 @@ class _TicketViewState extends State<TicketView> {
                     const SizedBox(height: 32),
                     Hero(
                       tag: 'busType' +
-                          ticketViewModel.ticket.travel.id.toString(),
+                          ticketViewModel.ticket.travelDetail.id.toString(),
                       child: Directionality(
                         textDirection: TextDirection.rtl,
                         child: Row(
@@ -186,7 +187,8 @@ class _TicketViewState extends State<TicketView> {
                           children: [
                             // const Spacer(),
                             Text(
-                              ticketViewModel.ticket.travel.bus.title,
+                              ticketViewModel
+                                  .ticket.travelDetail.travel.bus.title,
                               style: const TextStyle(
                                   color: colorTextPrimary,
                                   fontSize: fontSizeTitle),
@@ -197,7 +199,8 @@ class _TicketViewState extends State<TicketView> {
                                   color: colorTextSub, fontSize: fontSizeSub),
                             ),
                             Text(
-                              ticketViewModel.ticket.travel.bus.busType.title,
+                              ticketViewModel
+                                  .ticket.travelDetail.travel.bus.busType.title,
                               style: const TextStyle(
                                   color: colorTextPrimary,
                                   fontSize: fontSizeTitle),
@@ -213,9 +216,10 @@ class _TicketViewState extends State<TicketView> {
                       children: [
                         Hero(
                           tag: 'dateTime' +
-                              ticketViewModel.ticket.travel.id.toString(),
+                              ticketViewModel.ticket.travelDetail.id.toString(),
                           child: Text(
-                            ticketViewModel.ticket.travel.departureDatetime
+                            ticketViewModel
+                                .ticket.travelDetail.departureDatetime
                                 .substring(11, 16),
                             style: const TextStyle(
                                 color: colorTextPrimary,
@@ -227,7 +231,7 @@ class _TicketViewState extends State<TicketView> {
                         AnimationHandler().translateFromLeft(
                             Text(
                               convertTojalali(ticketViewModel
-                                  .ticket.travel.departureDatetime),
+                                  .ticket.travelDetail.departureDatetime),
                               style: const TextStyle(
                                   color: colorTextPrimary,
                                   fontWeight: FontWeight.bold,
@@ -239,8 +243,8 @@ class _TicketViewState extends State<TicketView> {
                     ),
                     const SizedBox(height: 32),
                     Hero(
-                      tag:
-                          'price' + ticketViewModel.ticket.travel.id.toString(),
+                      tag: 'price' +
+                          ticketViewModel.ticket.travelDetail.id.toString(),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 6, vertical: 7),
@@ -250,7 +254,8 @@ class _TicketViewState extends State<TicketView> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                ticketViewModel.ticket.travel.price.toString(),
+                                ticketViewModel.ticket.travelDetail.price
+                                    .toString(),
                                 style: const TextStyle(
                                     color: colorTextPrimary,
                                     fontWeight: FontWeight.bold,

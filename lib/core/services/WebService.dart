@@ -126,8 +126,35 @@ class WebService {
     return response;
   }
 
+  Future<http.Response> getTravelDetails(
+      int source, int dest, String date) async {
+    final url = Uri.parse(
+      baseUrl +
+          "/api/v1/travelDetail?destinationId=$dest&sourceId=$source&departureDatetime=${date}T11:00:01",
+    );
+    print(url);
+    String token = await getToken();
+
+    Map<String, String> header = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "x-access-token": token
+    };
+
+    http.Response response =
+        await http.get(url, headers: header).onError((error, stackTrace) {
+      print(error);
+      print(stackTrace);
+      return http.Response('', 500);
+    }).timeout(const Duration(milliseconds: 5000), onTimeout: () {
+      return http.Response('', 500);
+    });
+    print(response.body);
+
+    return response;
+  }
+
   Future<http.Response> postTicket(
-      String qrCode, int travelId, int userId) async {
+      String qrCode, int travelDetailId, int userId) async {
     final url = Uri.parse(baseUrl + "/api/v1/ticket");
 
     Map<String, String> header = {
@@ -135,7 +162,7 @@ class WebService {
     };
     Map data = {
       "qrCode": qrCode,
-      "travelId": travelId,
+      "travelDetailId": travelDetailId,
       "userId": userId,
     };
 

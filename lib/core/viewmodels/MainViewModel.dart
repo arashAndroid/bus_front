@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bus/core/models/Travel.dart';
+import 'package:bus/core/models/TravelDetail.dart';
 import 'package:bus/core/models/User.dart';
 import 'package:bus/core/services/WebService.dart';
 import 'package:bus/core/viewmodels/ResultViewModel.dart';
@@ -400,26 +401,26 @@ class MainViewModel with ChangeNotifier {
     _isSearching = true;
     notifyListeners();
     response = await WebService()
-        .getTravels(currentSourceId, currentDestinationId, dateString);
+        .getTravelDetails(currentSourceId, currentDestinationId, dateString);
     _isSearching = false;
     notifyListeners();
     if (handleResponse(response)) {
       final bodyResponse = json.decode(response.body);
 
-      List<Travel> travels = bodyResponse["Data"]
-          .map<Travel>((json) => Travel.fromJson(json))
+      List<TravelDetail> travelDetails = bodyResponse["Data"]
+          .map<TravelDetail>((json) => TravelDetail.fromJson(json))
           .toList();
 
-      if (travels.isEmpty) {
+      if (travelDetails.isEmpty) {
         EasyLoading.showInfo('اتوبوسی برای این تاریخ وجود ندارد');
       } else {
         ResultViewModel resultViewModel =
             Provider.of<ResultViewModel>(context, listen: false);
-        resultViewModel.travels = travels;
+        resultViewModel.travelDetails = travelDetails;
         Navigator.of(context).pushNamed('/ResultView');
       }
 
-      print('travel length = ${travels.length}');
+      print('travel length = ${travelDetails.length}');
     }
 
     return false;

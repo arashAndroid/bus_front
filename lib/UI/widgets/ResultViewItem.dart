@@ -1,4 +1,5 @@
 import 'package:bus/core/models/Travel.dart';
+import 'package:bus/core/models/TravelDetail.dart';
 import 'package:bus/core/viewmodels/TravelViewModel.dart';
 import 'package:bus/helpers/Constants.dart';
 import 'package:bus/helpers/MySeparator.dart';
@@ -6,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ResultViewItem extends StatelessWidget {
-  final Travel travel;
-  const ResultViewItem({Key key, this.travel}) : super(key: key);
+  final TravelDetail travelDetail;
+  const ResultViewItem({Key key, this.travelDetail}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class ResultViewItem extends StatelessWidget {
       onTap: () {
         TravelViewModel ticketViewModel =
             Provider.of<TravelViewModel>(context, listen: false);
-        ticketViewModel.travel = travel;
+        ticketViewModel.travelDetail = travelDetail;
         Navigator.of(context).pushNamed('/TravelView');
       },
       child: Container(
@@ -34,13 +35,13 @@ class ResultViewItem extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-              tag: 'cities' + travel.id.toString(),
+              tag: 'cities' + travelDetail.id.toString(),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: Row(
                   children: [
                     Text(
-                      travel.source.title,
+                      travelDetail.source.title,
                       style: const TextStyle(
                           shadows: [
                             Shadow(
@@ -102,7 +103,7 @@ class ResultViewItem extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      travel.destination.title,
+                      travelDetail.destination.title,
                       style: const TextStyle(
                           shadows: [
                             Shadow(
@@ -121,7 +122,7 @@ class ResultViewItem extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Hero(
-              tag: 'busType' + travel.id.toString(),
+              tag: 'busType' + travelDetail.id.toString(),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: Row(
@@ -129,7 +130,7 @@ class ResultViewItem extends StatelessWidget {
                   children: [
                     // const Spacer(),
                     Text(
-                      travel.bus.title,
+                      travelDetail.travel.bus.title,
                       style: const TextStyle(
                           color: colorTextSub, fontSize: fontSizeSub),
                     ),
@@ -139,7 +140,7 @@ class ResultViewItem extends StatelessWidget {
                           TextStyle(color: colorTextSub, fontSize: fontSizeSub),
                     ),
                     Text(
-                      travel.bus.busType.title,
+                      travelDetail.travel.bus.busType.title,
                       style: const TextStyle(
                           color: colorTextSub, fontSize: fontSizeSub),
                     ),
@@ -152,9 +153,9 @@ class ResultViewItem extends StatelessWidget {
             Row(
               children: [
                 Hero(
-                  tag: 'dateTime' + travel.id.toString(),
+                  tag: 'dateTime' + travelDetail.id.toString(),
                   child: Text(
-                    travel.departureDatetime.substring(11, 16),
+                    travelDetail.departureDatetime.substring(11, 16),
                     style: const TextStyle(
                         color: colorTextPrimary,
                         fontWeight: FontWeight.bold,
@@ -163,7 +164,7 @@ class ResultViewItem extends StatelessWidget {
                 ),
                 const Spacer(),
                 Hero(
-                  tag: 'price' + travel.id.toString(),
+                  tag: 'price' + travelDetail.id.toString(),
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
@@ -173,7 +174,7 @@ class ResultViewItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            travel.price.toString(),
+                            travelDetail.price.toString(),
                             textDirection: TextDirection.rtl,
                             style: const TextStyle(
                                 color: colorTextPrimary,

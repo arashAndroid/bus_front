@@ -42,11 +42,11 @@ class _ResultViewState extends State<ResultView> {
         ),
         body: Consumer<ResultViewModel>(
           builder: (_, resultConsumer, __) => ListView.builder(
-              itemCount: resultConsumer.travels.length,
+              itemCount: resultConsumer.travelDetails.length,
               itemBuilder: (context, index) =>
                   AnimationHandler().translateFromRight(
                       ResultViewItem(
-                        travel: resultConsumer.travels[index],
+                        travelDetail: resultConsumer.travelDetails[index],
                       ),
                       Curves.easeOutCubic,
                       index * 200.0)),

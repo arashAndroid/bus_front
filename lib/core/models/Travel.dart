@@ -12,8 +12,7 @@ class Travel {
   bool status;
   Driver driver;
   Bus bus;
-  City source;
-  City destination;
+
   Travel({
     this.id,
     this.price,
@@ -21,8 +20,6 @@ class Travel {
     this.status,
     this.driver,
     this.bus,
-    this.source,
-    this.destination,
   });
 
   Travel copyWith({
@@ -32,8 +29,6 @@ class Travel {
     bool status,
     Driver driver,
     Bus bus,
-    City source,
-    City destination,
   }) {
     return Travel(
       id: id ?? this.id,
@@ -42,8 +37,6 @@ class Travel {
       status: status ?? this.status,
       driver: driver ?? this.driver,
       bus: bus ?? this.bus,
-      source: source ?? this.source,
-      destination: destination ?? this.destination,
     );
   }
 
@@ -55,8 +48,6 @@ class Travel {
       'status': status,
       'driver': driver.toMap(),
       'bus': bus.toMap(),
-      'source': source.toMap(),
-      'destination': destination.toMap(),
     };
   }
 
@@ -68,8 +59,6 @@ class Travel {
       status: map['status'] == 1,
       driver: Driver.fromMap(map['driver']),
       bus: Bus.fromMap(map['bus']),
-      source: City.fromMap(map['source']),
-      destination: City.fromMap(map['destination']),
     );
   }
 
@@ -79,7 +68,7 @@ class Travel {
 
   @override
   String toString() {
-    return 'Travel(id: $id, price: $price, departureDatetime: $departureDatetime, status: $status, driver: $driver, bus: $bus, source: $source, destination: $destination)';
+    return 'Travel(id: $id, price: $price, departureDatetime: $departureDatetime, status: $status, driver: $driver, bus: $bus)';
   }
 
   @override
@@ -92,9 +81,7 @@ class Travel {
         other.departureDatetime == departureDatetime &&
         other.status == status &&
         other.driver == driver &&
-        other.bus == bus &&
-        other.source == source &&
-        other.destination == destination;
+        other.bus == bus;
   }
 
   @override
@@ -104,8 +91,6 @@ class Travel {
         departureDatetime.hashCode ^
         status.hashCode ^
         driver.hashCode ^
-        bus.hashCode ^
-        source.hashCode ^
-        destination.hashCode;
+        bus.hashCode;
   }
 }
