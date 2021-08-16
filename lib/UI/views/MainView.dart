@@ -127,6 +127,25 @@ class _MainViewState extends State<MainView> {
                     ),
                   ),
                 ),
+
+                Consumer<MainViewModel>(
+                  builder: (_, myTickets, __) => 
+                  
+                  InkWell(
+                    onTap: () async {
+                      Navigator.pushNamed(
+                        _,
+                        '/MyTicketsView',
+                      );
+                      // print('mytickets');
+                    },
+                    child: drawerItem(
+                      title: 'بلیط‌های من',
+                      icon: Icons.apps,
+                    ),
+                  ),
+                ),
+
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, '/AboutUsView');

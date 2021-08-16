@@ -179,4 +179,30 @@ class WebService {
 
     return response;
   }
+
+  Future<http.Response> getMyTickets() async {
+    var userDetail = await getUser();
+    final url = Uri.parse(
+        baseUrl + "/api/v1/ticket?userId=" + userDetail.id.toString());
+    print("url for myticketdetails -> " + url.toString());
+
+    // String token = await getToken();
+
+    Map<String, String> header = {
+      "Content-Type": "application/json; charset=UTF-8",
+      // "x-access-token": token
+    };
+
+    http.Response response =
+        await http.get(url, headers: header).onError((error, stackTrace) {
+      print(error);
+      print(stackTrace);
+      return http.Response('', 500);
+    }).timeout(const Duration(milliseconds: 5000), onTimeout: () {
+      return http.Response('', 500);
+    });
+    print(response.body);
+
+    return response;
+  }
 }
