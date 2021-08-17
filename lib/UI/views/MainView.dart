@@ -101,37 +101,8 @@ class _MainViewState extends State<MainView> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                InkWell(
-                  onTap: () async {
-                    Navigator.pushNamed(
-                      context,
-                      '/WalletView',
-                    );
-                  },
-                  child: drawerItem(
-                    title: 'کیف پول',
-                    icon: Icons.wallet_travel_rounded,
-                  ),
-                ),
                 Consumer<MainViewModel>(
-                  builder: (_, main, __) => InkWell(
-                    onTap: () async {
-                      Navigator.pushNamed(
-                        _,
-                        '/ProfileView',
-                      );
-                    },
-                    child: drawerItem(
-                      title: 'تنظیمات پروفایل',
-                      icon: Icons.apps,
-                    ),
-                  ),
-                ),
-
-                Consumer<MainViewModel>(
-                  builder: (_, myTickets, __) => 
-                  
-                  InkWell(
+                  builder: (_, myTickets, __) => InkWell(
                     onTap: () async {
                       Navigator.pushNamed(
                         _,
@@ -145,7 +116,6 @@ class _MainViewState extends State<MainView> {
                     ),
                   ),
                 ),
-
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, '/AboutUsView');

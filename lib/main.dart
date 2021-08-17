@@ -1,5 +1,7 @@
+import 'package:bus/UI/views/MyTicketDetailView.dart';
 import 'package:bus/UI/views/MyTicketsView.dart';
 import 'package:bus/UI/views/RegisterView.dart';
+import 'package:bus/core/viewmodels/MyTicketDetailViewModel.dart';
 import 'package:bus/core/viewmodels/MyTicketsViewModel.dart';
 import 'package:bus/core/viewmodels/ResultViewModel.dart';
 
@@ -59,6 +61,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
               create: (context) =>
                   MyTicketsViewModel(authServiceType: initialAuthServiceType)),
+          ChangeNotifierProvider(
+              create: (context) => MyTicketDetailViewModel(
+                  authServiceType: initialAuthServiceType)),
         ],
         child: MaterialApp(
           theme: ThemeData(
@@ -88,6 +93,9 @@ class MyApp extends StatelessWidget {
               case '/MyTicketsView':
                 return MaterialPageRoute(
                     builder: (context) => const MyTicketsView());
+              case '/MyTicketDetailView':
+                return MaterialPageRoute(
+                    builder: (context) => const MyTicketDetailView());
               default:
                 return MaterialPageRoute(
                     builder: (context) => const MainView());

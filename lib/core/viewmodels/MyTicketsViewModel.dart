@@ -15,7 +15,10 @@ class MyTicketsViewModel with ChangeNotifier {
   final AuthServiceType authServiceType;
   MyTicketsViewModel({this.authServiceType = AuthServiceType.real});
 
-  // MyTicketsViewModel ticket;
+  bool _isLoading = true;
+  bool get isLoading => _isLoading;
+
+  List<Ticket> tickets = [];
 
   Future<bool> getResults(BuildContext context) async {
     http.Response response;
@@ -24,22 +27,18 @@ class MyTicketsViewModel with ChangeNotifier {
     if (handleResponse(response)) {
       final bodyResponse = json.decode(response.body);
 
-      List<Ticket> travelDetails = bodyResponse["Data"]
+      tickets = bodyResponse["Data"]
           .map<Ticket>((json) => Ticket.fromJson(json))
           .toList();
 
-    //   if (travelDetails.isEmpty) {
-    //     EasyLoading.showInfo('اتوبوسی برای این تاریخ وجود ندارد');
-    //   } else {
-    //     ResultViewModel resultViewModel =
-    //         Provider.of<ResultViewModel>(context, listen: false);
-    //     resultViewModel.travelDetails = travelDetails;
-    //     Navigator.of(context).pushNamed('/ResultView');
-    //   }
+      _isLoading = false;
+      notifyListeners();
 
-    //   print('travel length = ${travelDetails.length}');
+      return true;
     }
 
+    _isLoading = false;
+    notifyListeners();
     return false;
   }
 }

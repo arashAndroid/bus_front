@@ -1,5 +1,6 @@
 import 'package:bus/UI/views/ClipShadowPath.dart';
 import 'package:bus/UI/widgets/TicketItem.dart';
+import 'package:bus/UI/widgets/TravelItem.dart';
 import 'package:bus/core/viewmodels/MainViewModel.dart';
 import 'package:bus/core/viewmodels/MyTicketsViewModel.dart';
 import 'package:bus/helpers/Constants.dart';
@@ -39,271 +40,42 @@ class _MyTicketsViewState extends State<MyTicketsView> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          appBar: AppBar(
-            key: const Key('mainAppBar'),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            title: const Text(
-              'جزئیات اتوبوس',
-              style: TextStyle(
-                color: colorTextPrimary,
-                fontSize: fontSizeTitle + 2,
-                fontWeight: FontWeight.bold,
-              ),
+        backgroundColor: colorBackground,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: const Text(
+            'بلیط‌های من',
+            style: TextStyle(
+              color: colorTextPrimary,
+              fontSize: fontSizeTitle + 2,
+              fontWeight: FontWeight.bold,
             ),
-            iconTheme: const IconThemeData(color: colorTextPrimary),
           ),
-          body: Container()
-
-          // Container(
-          //   margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-          //   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-          //   child: Column(
-          //     children: [
-          //       AnimationHandler().translateFromRight(
-          //           const Image(
-          //               image: AssetImage('images/travel.png'), height: 150),
-          //           Curves.easeOutCubic,
-          //           0),
-          //       const SizedBox(height: 32),
-          //       Directionality(
-          //         textDirection: TextDirection.rtl,
-          //         child: Row(
-          //           children: [
-          //             Text(
-          //               myTicketsViewModel.travelDetail.source.title,
-          //               style: const TextStyle(
-          //                   shadows: [
-          //                     Shadow(
-          //                       offset: Offset(0.0, 0.0),
-          //                       blurRadius: 1.0,
-          //                       color: colorSource,
-          //                     ),
-          //                   ],
-          //                   color: colorSource,
-          //                   fontWeight: FontWeight.bold,
-          //                   fontSize: fontSizeTitle + 5),
-          //             ),
-          //             const SizedBox(width: 8),
-          //             Container(
-          //               width: 10,
-          //               height: 10,
-          //               decoration: BoxDecoration(
-          //                   color: colorSource,
-          //                   boxShadow: [
-          //                     BoxShadow(
-          //                         color: colorSource.withOpacity(0.5),
-          //                         spreadRadius: 1,
-          //                         blurRadius: 3),
-          //                   ],
-          //                   shape: BoxShape.circle),
-          //             ),
-          //             const SizedBox(width: 8),
-          //             const Expanded(
-          //               child: MySeparator(color: colorTextSub),
-          //             ),
-          //             const SizedBox(width: 4),
-          //             const Icon(
-          //               Icons.directions_bus,
-          //               color: colorTextSub,
-          //               size: 25,
-          //             ),
-          //             const Icon(
-          //               Icons.arrow_forward_ios,
-          //               color: colorTextSub,
-          //               size: 15,
-          //             ),
-          //             const SizedBox(width: 4),
-          //             const Expanded(
-          //               child: MySeparator(color: colorTextSub),
-          //             ),
-          //             const SizedBox(width: 8),
-          //             Container(
-          //               width: 10,
-          //               height: 10,
-          //               decoration: BoxDecoration(
-          //                   color: colorDestination,
-          //                   boxShadow: [
-          //                     BoxShadow(
-          //                         color: colorDestination.withOpacity(0.5),
-          //                         spreadRadius: 1,
-          //                         blurRadius: 3),
-          //                   ],
-          //                   shape: BoxShape.circle),
-          //             ),
-          //             const SizedBox(width: 8),
-          //             Text(
-          //               travelViewModel.travelDetail.destination.title,
-          //               style: const TextStyle(
-          //                   shadows: [
-          //                     Shadow(
-          //                       offset: Offset(0.0, 0.0),
-          //                       blurRadius: 1.0,
-          //                       color: colorDestination,
-          //                     ),
-          //                   ],
-          //                   color: colorDestination,
-          //                   fontWeight: FontWeight.bold,
-          //                   fontSize: fontSizeTitle + 5),
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //       const SizedBox(height: 32),
-          //       Hero(
-          //         tag: 'busType' + travelViewModel.travelDetail.id.toString(),
-          //         child: Directionality(
-          //           textDirection: TextDirection.rtl,
-          //           child: Row(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [
-          //               // const Spacer(),
-          //               Text(
-          //                 travelViewModel.travelDetail.travel.bus.title,
-          //                 style: const TextStyle(
-          //                     color: colorTextPrimary, fontSize: fontSizeTitle),
-          //               ),
-          //               const Text(
-          //                 ' - ',
-          //                 style: TextStyle(
-          //                     color: colorTextSub, fontSize: fontSizeSub),
-          //               ),
-          //               Text(
-          //                 travelViewModel.travelDetail.travel.bus.busType.title,
-          //                 style: const TextStyle(
-          //                     color: colorTextPrimary, fontSize: fontSizeTitle),
-          //               ),
-          //               // const Spacer(),
-          //             ],
-          //           ),
-          //         ),
-          //       ),
-          //       const SizedBox(height: 32),
-          //       Row(
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         children: [
-          //           Hero(
-          //             tag:
-          //                 'dateTime' + travelViewModel.travelDetail.id.toString(),
-          //             child: Text(
-          //               travelViewModel.travelDetail.departureDatetime
-          //                   .substring(11, 16),
-          //               style: const TextStyle(
-          //                   color: colorTextPrimary,
-          //                   fontWeight: FontWeight.bold,
-          //                   fontSize: fontSizeTitle),
-          //             ),
-          //           ),
-          //           const SizedBox(width: 8),
-          //           AnimationHandler().translateFromLeft(
-          //               Text(
-          //                 convertTojalali(
-          //                     travelViewModel.travelDetail.departureDatetime),
-          //                 style: const TextStyle(
-          //                     color: colorTextPrimary,
-          //                     fontWeight: FontWeight.bold,
-          //                     fontSize: fontSizeTitle),
-          //               ),
-          //               Curves.easeOutCubic,
-          //               0),
-          //         ],
-          //       ),
-          //       const SizedBox(height: 32),
-          //       Hero(
-          //         tag: 'price' + travelViewModel.travelDetail.id.toString(),
-          //         child: Padding(
-          //           padding:
-          //               const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
-          //           child: Directionality(
-          //             textDirection: TextDirection.rtl,
-          //             child: Row(
-          //               mainAxisAlignment: MainAxisAlignment.center,
-          //               children: [
-          //                 Text(
-          //                   travelViewModel.travelDetail.price.toString(),
-          //                   style: const TextStyle(
-          //                       color: colorTextPrimary,
-          //                       fontWeight: FontWeight.bold,
-          //                       fontSize: fontSizeTitle + 10),
-          //                 ),
-          //                 const SizedBox(width: 2),
-          //                 const Text(
-          //                   'تومان',
-          //                   style: TextStyle(
-          //                       color: colorTextSub,
-          //                       fontWeight: FontWeight.normal,
-          //                       fontSize: fontSizeSub + 5),
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //       const SizedBox(height: 32),
-          //       Row(
-          //         children: [
-          //           const Spacer(),
-          //           AnimationHandler().translateFromLeft(
-          //               Row(
-          //                 mainAxisSize: MainAxisSize.max,
-          //                 mainAxisAlignment: MainAxisAlignment.end,
-          //                 children: [
-          //                   Consumer<TravelViewModel>(
-          //                     builder: (_, travelButtonConsumer, __) => InkWell(
-          //                       onTap: () {
-          //                         travelViewModel.generateTicket(context);
-          //                       },
-          //                       child: Container(
-          //                         alignment: Alignment.centerLeft,
-          //                         padding: const EdgeInsets.symmetric(
-          //                             horizontal: 16, vertical: 12),
-          //                         decoration: BoxDecoration(
-          //                             borderRadius: BorderRadius.circular(10),
-          //                             color: colorPrimary,
-          //                             boxShadow: [
-          //                               BoxShadow(
-          //                                   blurRadius: 3,
-          //                                   spreadRadius: 1,
-          //                                   color: Colors.black.withOpacity(0.05))
-          //                             ]),
-          //                         child: travelButtonConsumer.isLoading
-          //                             ? const Center(
-          //                                 child: SpinKitThreeBounce(
-          //                                   size: 25,
-          //                                   color: colorTextSub,
-          //                                 ),
-          //                               )
-          //                             : Row(
-          //                                 children: const [
-          //                                   Text(
-          //                                     'پرداخت',
-          //                                     style: TextStyle(
-          //                                       color: colorTextWhite,
-          //                                       fontSize: fontSizeTitle,
-          //                                     ),
-          //                                   ),
-          //                                   SizedBox(width: 8),
-          //                                   Icon(
-          //                                     Icons.arrow_forward_ios,
-          //                                     color: colorTextWhite,
-          //                                     size: 20,
-          //                                   )
-          //                                 ],
-          //                               ),
-          //                       ),
-          //                     ),
-          //                   ),
-          //                 ],
-          //               ),
-          //               Curves.easeOutCubic,
-          //               0)
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          // ),
-
-          ),
+          iconTheme: const IconThemeData(color: colorTextPrimary),
+        ),
+        body: Consumer<MyTicketsViewModel>(
+          builder: (_, myTicketConsumer, __) => myTicketConsumer.isLoading
+              ? const Center(
+                  child: SpinKitThreeBounce(
+                    color: colorPrimary,
+                    size: 25,
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: myTicketConsumer.tickets.length,
+                  itemBuilder: (context, index) =>
+                      AnimationHandler().translateFromRight(
+                          TravelItem(
+                            travelDetail:
+                                myTicketConsumer.tickets[index].travelDetail,
+                            ticket: myTicketConsumer.tickets[index],
+                            routeName: '/MyTicketDetailView',
+                          ),
+                          Curves.easeOutCubic,
+                          index * 200.0)),
+        ),
+      ),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:bus/UI/widgets/ResultViewItem.dart';
+import 'package:bus/UI/widgets/TravelItem.dart';
 import 'package:bus/core/viewmodels/ResultViewModel.dart';
 import 'package:bus/helpers/AnimationHandler.dart';
 import 'package:bus/helpers/Constants.dart';
@@ -45,7 +45,7 @@ class _ResultViewState extends State<ResultView> {
               itemCount: resultConsumer.travelDetails.length,
               itemBuilder: (context, index) =>
                   AnimationHandler().translateFromRight(
-                      ResultViewItem(
+                      TravelItem(
                         travelDetail: resultConsumer.travelDetails[index],
                       ),
                       Curves.easeOutCubic,

@@ -1,23 +1,35 @@
+import 'package:bus/core/models/Ticket.dart';
 import 'package:bus/core/models/Travel.dart';
 import 'package:bus/core/models/TravelDetail.dart';
+import 'package:bus/core/viewmodels/MyTicketDetailViewModel.dart';
 import 'package:bus/core/viewmodels/TravelViewModel.dart';
 import 'package:bus/helpers/Constants.dart';
 import 'package:bus/helpers/MySeparator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ResultViewItem extends StatelessWidget {
+class TravelItem extends StatelessWidget {
   final TravelDetail travelDetail;
-  const ResultViewItem({Key key, this.travelDetail}) : super(key: key);
+  final String routeName;
+  final Ticket ticket;
+  const TravelItem(
+      {Key key, this.travelDetail, this.routeName = '/TravelView', this.ticket})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        TravelViewModel ticketViewModel =
-            Provider.of<TravelViewModel>(context, listen: false);
-        ticketViewModel.travelDetail = travelDetail;
-        Navigator.of(context).pushNamed('/TravelView');
+        if (routeName == '/MyTicketDetailView') {
+          MyTicketDetailViewModel myTicketDetailViewModel =
+              Provider.of<MyTicketDetailViewModel>(context, listen: false);
+          myTicketDetailViewModel.ticket = ticket;
+        } else {
+          TravelViewModel travelViewModel =
+              Provider.of<TravelViewModel>(context, listen: false);
+          travelViewModel.travelDetail = travelDetail;
+        }
+        Navigator.of(context).pushNamed(routeName);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
@@ -35,7 +47,9 @@ class ResultViewItem extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-              tag: 'cities' + travelDetail.id.toString(),
+              tag: 'cities' +
+                  travelDetail.id.toString() +
+                  (ticket == null ? '' : ticket.id.toString()),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: Row(
@@ -122,7 +136,9 @@ class ResultViewItem extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Hero(
-              tag: 'busType' + travelDetail.id.toString(),
+              tag: 'busType' +
+                  travelDetail.id.toString() +
+                  (ticket == null ? '' : ticket.id.toString()),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: Row(
@@ -153,7 +169,9 @@ class ResultViewItem extends StatelessWidget {
             Row(
               children: [
                 Hero(
-                  tag: 'dateTime' + travelDetail.id.toString(),
+                  tag: 'dateTime' +
+                      travelDetail.id.toString() +
+                      (ticket == null ? '' : ticket.id.toString()),
                   child: Text(
                     travelDetail.departureDatetime.substring(11, 16),
                     style: const TextStyle(
@@ -164,7 +182,9 @@ class ResultViewItem extends StatelessWidget {
                 ),
                 const Spacer(),
                 Hero(
-                  tag: 'price' + travelDetail.id.toString(),
+                  tag: 'price' +
+                      travelDetail.id.toString() +
+                      (ticket == null ? '' : ticket.id.toString()),
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
