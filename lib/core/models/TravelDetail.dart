@@ -7,6 +7,7 @@ import 'City.dart';
 class TravelDetail {
   int id;
   int price;
+  int capacity;
   bool status;
   City source;
   City destination;
@@ -15,6 +16,7 @@ class TravelDetail {
   TravelDetail({
     this.id,
     this.price,
+    this.capacity,
     this.status,
     this.source,
     this.destination,
@@ -25,6 +27,7 @@ class TravelDetail {
   TravelDetail copyWith({
     int id,
     int price,
+    int capacity,
     bool status,
     City source,
     City destination,
@@ -34,6 +37,7 @@ class TravelDetail {
     return TravelDetail(
       id: id ?? this.id,
       price: price ?? this.price,
+      capacity: capacity ?? this.capacity,
       status: status ?? this.status,
       source: source ?? this.source,
       destination: destination ?? this.destination,
@@ -46,6 +50,7 @@ class TravelDetail {
     return {
       'id': id,
       'price': price,
+      'capacity': capacity,
       'status': status,
       'source': source.toMap(),
       'destination': destination.toMap(),
@@ -58,6 +63,7 @@ class TravelDetail {
     return TravelDetail(
       id: map['id'],
       price: map['price'],
+      capacity: map['capacity'] ?? 0,
       status: map['status'] == 1,
       source: City.fromMap(map['source']),
       destination: City.fromMap(map['destination']),
@@ -72,7 +78,7 @@ class TravelDetail {
 
   @override
   String toString() {
-    return 'TravelDetail(id: $id, price: $price, status: $status, source: $source, destination: $destination, departureDatetime: $departureDatetime, travel: $travel)';
+    return 'TravelDetail(id: $id, price: $price, capacity: $capacity, status: $status, source: $source, destination: $destination, departureDatetime: $departureDatetime, travel: $travel)';
   }
 
   @override
@@ -82,6 +88,7 @@ class TravelDetail {
     return other is TravelDetail &&
         other.id == id &&
         other.price == price &&
+        other.capacity == capacity &&
         other.status == status &&
         other.source == source &&
         other.destination == destination &&
@@ -93,6 +100,7 @@ class TravelDetail {
   int get hashCode {
     return id.hashCode ^
         price.hashCode ^
+        capacity.hashCode ^
         status.hashCode ^
         source.hashCode ^
         destination.hashCode ^

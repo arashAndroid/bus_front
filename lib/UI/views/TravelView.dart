@@ -173,8 +173,7 @@ class _TravelViewState extends State<TravelView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Hero(
-                    tag:
-                        'dateTime' + travelViewModel.travelDetail.id.toString(),
+                    tag: 'time' + travelViewModel.travelDetail.id.toString(),
                     child: Text(
                       travelViewModel.travelDetail.departureDatetime
                           .substring(11, 16),
@@ -185,20 +184,51 @@ class _TravelViewState extends State<TravelView> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  AnimationHandler().translateFromLeft(
-                      Text(
-                        convertTojalali(
-                            travelViewModel.travelDetail.departureDatetime),
-                        style: const TextStyle(
-                            color: colorTextPrimary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: fontSizeTitle),
-                      ),
-                      Curves.easeOutCubic,
-                      0),
+                  Hero(
+                    tag: 'date' + travelViewModel.travelDetail.id.toString(),
+                    child: Text(
+                      convertTojalali(
+                          travelViewModel.travelDetail.departureDatetime),
+                      style: const TextStyle(
+                          color: colorTextPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: fontSizeTitle),
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
+              Hero(
+                tag: 'capacity' + travelViewModel.travelDetail.id.toString(),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          travelViewModel.travelDetail.capacity.toString(),
+                          style: const TextStyle(
+                              color: colorTextPrimary,
+                              fontWeight: FontWeight.bold,
+                              fontSize: fontSizeTitle + 5),
+                        ),
+                        const SizedBox(width: 2),
+                        const Text(
+                          'صندلی خالی',
+                          style: TextStyle(
+                              color: colorTextSub,
+                              fontWeight: FontWeight.normal,
+                              fontSize: fontSizeSub),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
               Hero(
                 tag: 'price' + travelViewModel.travelDetail.id.toString(),
                 child: Padding(
@@ -211,16 +241,18 @@ class _TravelViewState extends State<TravelView> {
                       children: [
                         Text(
                           travelViewModel.travelDetail.price.toString(),
+                          textDirection: TextDirection.rtl,
                           style: const TextStyle(
-                              color: colorTextPrimary,
+                              color: colorMoney,
                               fontWeight: FontWeight.bold,
                               fontSize: fontSizeTitle + 10),
                         ),
                         const SizedBox(width: 2),
                         const Text(
                           'تومان',
+                          textDirection: TextDirection.rtl,
                           style: TextStyle(
-                              color: colorTextSub,
+                              color: colorMoney,
                               fontWeight: FontWeight.normal,
                               fontSize: fontSizeSub + 5),
                         ),

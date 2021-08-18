@@ -5,6 +5,7 @@ import 'package:bus/core/viewmodels/MyTicketDetailViewModel.dart';
 import 'package:bus/core/viewmodels/TravelViewModel.dart';
 import 'package:bus/helpers/Constants.dart';
 import 'package:bus/helpers/MySeparator.dart';
+import 'package:bus/helpers/helperFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -168,50 +169,89 @@ class TravelItem extends StatelessWidget {
             const SizedBox(height: 16),
             Row(
               children: [
-                Hero(
-                  tag: 'dateTime' +
-                      travelDetail.id.toString() +
-                      (ticket == null ? '' : ticket.id.toString()),
-                  child: Text(
-                    travelDetail.departureDatetime.substring(11, 16),
-                    style: const TextStyle(
-                        color: colorTextPrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: fontSizeTitle),
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Hero(
+                      tag: 'time' +
+                          travelDetail.id.toString() +
+                          (ticket == null ? '' : ticket.id.toString()),
+                      child: Text(
+                        travelDetail.departureDatetime.substring(11, 16),
+                        style: const TextStyle(
+                            color: colorTextPrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: fontSizeTitle),
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Hero(
+                      tag: 'date' +
+                          travelDetail.id.toString() +
+                          (ticket == null ? '' : ticket.id.toString()),
+                      child: Text(
+                        convertTojalali(travelDetail.departureDatetime),
+                        style: const TextStyle(
+                            color: colorTextSub,
+                            fontWeight: FontWeight.normal,
+                            fontSize: fontSizeSub),
+                      ),
+                    ),
+                  ],
                 ),
                 const Spacer(),
-                Hero(
-                  tag: 'price' +
-                      travelDetail.id.toString() +
-                      (ticket == null ? '' : ticket.id.toString()),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
-                    child: Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            travelDetail.price.toString(),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Hero(
+                          tag: 'price' +
+                              travelDetail.id.toString() +
+                              (ticket == null ? '' : ticket.id.toString()),
+                          child: Directionality(
                             textDirection: TextDirection.rtl,
-                            style: const TextStyle(
-                                color: colorTextPrimary,
-                                fontWeight: FontWeight.bold,
-                                fontSize: fontSizeTitle),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  travelDetail.price.toString(),
+                                  textDirection: TextDirection.rtl,
+                                  style: const TextStyle(
+                                      color: colorMoney,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: fontSizeTitle),
+                                ),
+                                const SizedBox(width: 2),
+                                const Text(
+                                  'تومان',
+                                  textDirection: TextDirection.rtl,
+                                  style: TextStyle(
+                                      color: colorMoney,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: fontSizeSub),
+                                ),
+                              ],
+                            ),
                           ),
-                          const SizedBox(width: 2),
-                          const Text(
-                            'تومان',
-                            textDirection: TextDirection.rtl,
-                            style: TextStyle(
+                        ),
+                        const SizedBox(height: 2),
+                        Hero(
+                          tag: 'capacity' +
+                              travelDetail.id.toString() +
+                              (ticket == null ? '' : ticket.id.toString()),
+                          child: Text(
+                            'ظرفیت ' + travelDetail.capacity.toString() + "نفر",
+                            style: const TextStyle(
                                 color: colorTextSub,
                                 fontWeight: FontWeight.normal,
                                 fontSize: fontSizeSub),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

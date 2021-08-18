@@ -24,7 +24,10 @@ const Color colorSource = Color(0xFFffb965); //
 const Color colorDestination = Color(0xFF9094fb); //
 const Color colorBackground = Color(0xFFfbfbfb); //
 
-const String baseUrl = 'http://192.168.1.105:8085';
+const Color colorMoney = Colors.green; //
+
+const String baseUrl = 'http://apibus.mysetad.ir';
+// const String baseUrl = 'http://192.168.1.100:8085';
 
 const double fontSizeTitle = 17;
 const double fontSizeSubTitle = 15;
