@@ -1,8 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bus">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="bus"
-        android:icon="@mipmap/ic_launcher"
+        android:label="اتوبوس"
+        android:icon="@mipmap/launcher_icon"
         android:usesCleartextTraffic="true">
         
         <activity
