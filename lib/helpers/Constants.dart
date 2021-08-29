@@ -26,7 +26,7 @@ const Color colorBackground = Color(0xFFfbfbfb); //
 
 const Color colorMoney = Colors.green; //
 
-const String baseUrl = 'http://apibus.mysetad.ir';
+const String baseUrl = 'https://apibus.mysetad.ir';
 // const String baseUrl = 'http://192.168.1.100:8085';
 
 const double fontSizeTitle = 17;
