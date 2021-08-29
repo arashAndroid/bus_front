@@ -133,28 +133,25 @@ class _TicketViewState extends State<TicketView> {
               ),
               Align(
                 alignment: Alignment.center,
-                child: SingleChildScrollView(
-                  child: Container(
-                    constraints: kIsWeb
-                        ? BoxConstraints(maxWidth: size.width / 2)
-                        : const BoxConstraints(),
-                    margin: const EdgeInsets.only(
-                        right: 16,
-                        left: 16,
-                        bottom: 8,
-                        top: 8 + kToolbarHeight),
-                    // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 4 / 5,
-                    // color: Colors.white,
-                    child: ClipShadowPath(
-                      clipper: TicketClipper(),
-                      shadow: Shadow(
-                          color: Colors.black.withOpacity(0.1), blurRadius: 5),
-                      child: Container(
-                        padding: const EdgeInsets.only(
-                            left: 32, right: 32, top: 32, bottom: 16),
-                        color: Colors.white,
+                child: Container(
+                  constraints: kIsWeb
+                      ? BoxConstraints(maxWidth: size.width / 2)
+                      : const BoxConstraints(),
+                  margin: const EdgeInsets.only(
+                      right: 16, left: 16, bottom: 8, top: 8 + kToolbarHeight),
+                  // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 4 / 5,
+                  // color: Colors.white,
+                  child: ClipShadowPath(
+                    clipper: TicketClipper(),
+                    shadow: Shadow(
+                        color: Colors.black.withOpacity(0.1), blurRadius: 5),
+                    child: Container(
+                      padding: const EdgeInsets.only(
+                          left: 32, right: 32, top: 32, bottom: 16),
+                      color: Colors.white,
+                      child: SingleChildScrollView(
                         child: Column(
                           children: [
                             Row(
