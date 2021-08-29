@@ -17,6 +17,7 @@ import 'package:bus/helpers/AnimationHandler.dart';
 import 'package:bus/helpers/Constants.dart';
 import 'package:bus/helpers/MySeparator.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class MyTicketsView extends StatefulWidget {
   const MyTicketsView({Key key}) : super(key: key);
@@ -38,6 +39,7 @@ class _MyTicketsViewState extends State<MyTicketsView> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Directionality(
         textDirection: TextDirection.rtl,
@@ -111,26 +113,34 @@ class _MyTicketsViewState extends State<MyTicketsView> {
                   ),
                 ),
               ),
-              Consumer<MyTicketsViewModel>(
-                builder: (_, myTicketConsumer, __) => myTicketConsumer.isLoading
-                    ? const Center(
-                        child: SpinKitThreeBounce(
-                          color: colorPrimary,
-                          size: 25,
-                        ),
-                      )
-                    : ListView.builder(
-                        itemCount: myTicketConsumer.tickets.length,
-                        itemBuilder: (context, index) =>
-                            AnimationHandler().translateFromRight(
-                                TravelItem(
-                                  travelDetail: myTicketConsumer
-                                      .tickets[index].travelDetail,
-                                  ticket: myTicketConsumer.tickets[index],
-                                  routeName: '/MyTicketDetailView',
-                                ),
-                                Curves.easeOutCubic,
-                                index * 200.0)),
+              Align(
+                child: Container(
+                  constraints: kIsWeb
+                      ? BoxConstraints(maxWidth: size.width / 3)
+                      : const BoxConstraints(),
+                  child: Consumer<MyTicketsViewModel>(
+                    builder: (_, myTicketConsumer, __) => myTicketConsumer
+                            .isLoading
+                        ? const Center(
+                            child: SpinKitThreeBounce(
+                              color: colorPrimary,
+                              size: 25,
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: myTicketConsumer.tickets.length,
+                            itemBuilder: (context, index) =>
+                                AnimationHandler().translateFromRight(
+                                    TravelItem(
+                                      travelDetail: myTicketConsumer
+                                          .tickets[index].travelDetail,
+                                      ticket: myTicketConsumer.tickets[index],
+                                      routeName: '/MyTicketDetailView',
+                                    ),
+                                    Curves.easeOutCubic,
+                                    index * 200.0)),
+                  ),
+                ),
               ),
             ],
           ),

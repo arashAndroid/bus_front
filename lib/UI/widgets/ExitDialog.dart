@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../helpers/Constants.dart';
 import '../../helpers/SharedPrefHelper.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class ExitDialog extends Dialog {
   @override
@@ -9,10 +10,14 @@ class ExitDialog extends Dialog {
       print("tapped");
     }
 
+    Size size = MediaQuery.of(context).size;
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
       backgroundColor: colorTextWhite,
-      child: Padding(
+      child: Container(
+        constraints: kIsWeb
+            ? BoxConstraints(maxWidth: size.width / 3)
+            : const BoxConstraints(),
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,

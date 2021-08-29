@@ -6,6 +6,7 @@ import 'package:bus/helpers/AnimationHandler.dart';
 import 'package:bus/helpers/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class ResultView extends StatefulWidget {
   const ResultView({Key key}) : super(key: key);
@@ -24,6 +25,7 @@ class _ResultViewState extends State<ResultView> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Directionality(
         textDirection: TextDirection.rtl,
@@ -100,16 +102,25 @@ class _ResultViewState extends State<ResultView> {
                   ),
                 ),
               ),
-              Consumer<ResultViewModel>(
-                builder: (_, resultConsumer, __) => ListView.builder(
-                    itemCount: resultConsumer.travelDetails.length,
-                    itemBuilder: (context, index) =>
-                        AnimationHandler().translateFromRight(
-                            TravelItem(
-                              travelDetail: resultConsumer.travelDetails[index],
-                            ),
-                            Curves.easeOutCubic,
-                            index * 200.0)),
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  constraints: kIsWeb
+                      ? BoxConstraints(maxWidth: size.width / 3)
+                      : const BoxConstraints(),
+                  child: Consumer<ResultViewModel>(
+                    builder: (_, resultConsumer, __) => ListView.builder(
+                        itemCount: resultConsumer.travelDetails.length,
+                        itemBuilder: (context, index) =>
+                            AnimationHandler().translateFromRight(
+                                TravelItem(
+                                  travelDetail:
+                                      resultConsumer.travelDetails[index],
+                                ),
+                                Curves.easeOutCubic,
+                                index * 200.0)),
+                  ),
+                ),
               ),
             ],
           ),
