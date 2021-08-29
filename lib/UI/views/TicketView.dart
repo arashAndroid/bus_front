@@ -152,113 +152,117 @@ class _TicketViewState extends State<TicketView> {
                           left: 32, right: 32, top: 32, bottom: 16),
                       color: Colors.white,
                       child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TicketItem(
-                                    title: 'نام کاربر',
-                                    text: ticketViewModel.ticket.user.username,
+                        child: SizedBox(
+                          height: (MediaQuery.of(context).size.height * 4 / 5),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TicketItem(
+                                      title: 'نام کاربر',
+                                      text:
+                                          ticketViewModel.ticket.user.username,
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: TicketItem(
-                                    title: 'تاریخ حرکت',
-                                    text: ticketViewModel.ticket.travelDetail
-                                            .departureDatetime
-                                            .substring(11, 16) +
-                                        ' - ' +
-                                        convertTojalali(ticketViewModel.ticket
-                                            .travelDetail.departureDatetime),
+                                  Expanded(
+                                    child: TicketItem(
+                                      title: 'تاریخ حرکت',
+                                      text: ticketViewModel.ticket.travelDetail
+                                              .departureDatetime
+                                              .substring(11, 16) +
+                                          ' - ' +
+                                          convertTojalali(ticketViewModel.ticket
+                                              .travelDetail.departureDatetime),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TicketItem(
-                                    title: 'مبدا',
-                                    text: ticketViewModel
-                                        .ticket.travelDetail.source.title,
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TicketItem(
+                                      title: 'مبدا',
+                                      text: ticketViewModel
+                                          .ticket.travelDetail.source.title,
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: TicketItem(
-                                    title: 'مقصد',
-                                    text: ticketViewModel
-                                        .ticket.travelDetail.destination.title,
+                                  Expanded(
+                                    child: TicketItem(
+                                      title: 'مقصد',
+                                      text: ticketViewModel.ticket.travelDetail
+                                          .destination.title,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TicketItem(
-                                    title: 'اتوبوس',
-                                    text: ticketViewModel
-                                        .ticket.travelDetail.travel.bus.title,
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TicketItem(
+                                      title: 'اتوبوس',
+                                      text: ticketViewModel
+                                          .ticket.travelDetail.travel.bus.title,
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: TicketItem(
-                                    title: 'مدل',
-                                    text: ticketViewModel.ticket.travelDetail
-                                        .travel.bus.busType.title,
+                                  Expanded(
+                                    child: TicketItem(
+                                      title: 'مدل',
+                                      text: ticketViewModel.ticket.travelDetail
+                                          .travel.bus.busType.title,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TicketItem(
-                                    title: 'پلاک',
-                                    text: ticketViewModel
-                                        .ticket.travelDetail.travel.bus.plate,
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TicketItem(
+                                      title: 'پلاک',
+                                      text: ticketViewModel
+                                          .ticket.travelDetail.travel.bus.plate,
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: TicketItem(
-                                    title: 'راننده',
-                                    text: ticketViewModel.ticket.travelDetail
-                                            .travel.driver.firstName +
-                                        ' ' +
-                                        ticketViewModel.ticket.travelDetail
-                                            .travel.driver.lastName,
+                                  Expanded(
+                                    child: TicketItem(
+                                      title: 'راننده',
+                                      text: ticketViewModel.ticket.travelDetail
+                                              .travel.driver.firstName +
+                                          ' ' +
+                                          ticketViewModel.ticket.travelDetail
+                                              .travel.driver.lastName,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TicketItem(
-                                    title: 'قیمت',
-                                    text: ticketViewModel
-                                            .ticket.travelDetail.price
-                                            .toString() +
-                                        ' تومان',
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TicketItem(
+                                      title: 'قیمت',
+                                      text: ticketViewModel
+                                              .ticket.travelDetail.price
+                                              .toString() +
+                                          ' تومان',
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: TicketItem(
-                                    title: 'کد پیگیری',
-                                    text: ticketViewModel.ticket.qrCode,
+                                  Expanded(
+                                    child: TicketItem(
+                                      title: 'کد پیگیری',
+                                      text: ticketViewModel.ticket.qrCode,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            QrImage(
-                              data: ticketViewModel.ticket.qrCode,
-                              version: QrVersions.auto,
-                              size: 200.0,
-                            ),
-                            const Spacer(),
-                          ],
+                                ],
+                              ),
+                              const Spacer(),
+                              QrImage(
+                                data: ticketViewModel.ticket.qrCode,
+                                version: QrVersions.auto,
+                                size: 200.0,
+                              ),
+                              const Spacer(),
+                            ],
+                          ),
                         ),
                       ),
                     ),
