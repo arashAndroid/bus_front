@@ -129,127 +129,130 @@ class _TicketViewState extends State<TicketView> {
                   ),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(
-                    right: 16, left: 16, bottom: 8, top: 8 + kToolbarHeight),
-                // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 4 / 5,
-                // color: Colors.white,
-                child: ClipShadowPath(
-                  clipper: TicketClipper(),
-                  shadow: Shadow(
-                      color: Colors.black.withOpacity(0.1), blurRadius: 5),
-                  child: Container(
-                    padding: const EdgeInsets.only(
-                        left: 32, right: 32, top: 32, bottom: 16),
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TicketItem(
-                                title: 'نام کاربر',
-                                text: ticketViewModel.ticket.user.username,
+              SingleChildScrollView(
+                child: Container(
+                  margin: const EdgeInsets.only(
+                      right: 16, left: 16, bottom: 8, top: 8 + kToolbarHeight),
+                  // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 4 / 5,
+                  // color: Colors.white,
+                  child: ClipShadowPath(
+                    clipper: TicketClipper(),
+                    shadow: Shadow(
+                        color: Colors.black.withOpacity(0.1), blurRadius: 5),
+                    child: Container(
+                      padding: const EdgeInsets.only(
+                          left: 32, right: 32, top: 32, bottom: 16),
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TicketItem(
+                                  title: 'نام کاربر',
+                                  text: ticketViewModel.ticket.user.username,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: TicketItem(
-                                title: 'تاریخ حرکت',
-                                text: ticketViewModel
-                                        .ticket.travelDetail.departureDatetime
-                                        .substring(11, 16) +
-                                    ' - ' +
-                                    convertTojalali(ticketViewModel
-                                        .ticket.travelDetail.departureDatetime),
+                              Expanded(
+                                child: TicketItem(
+                                  title: 'تاریخ حرکت',
+                                  text: ticketViewModel
+                                          .ticket.travelDetail.departureDatetime
+                                          .substring(11, 16) +
+                                      ' - ' +
+                                      convertTojalali(ticketViewModel.ticket
+                                          .travelDetail.departureDatetime),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TicketItem(
-                                title: 'مبدا',
-                                text: ticketViewModel
-                                    .ticket.travelDetail.source.title,
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TicketItem(
+                                  title: 'مبدا',
+                                  text: ticketViewModel
+                                      .ticket.travelDetail.source.title,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: TicketItem(
-                                title: 'مقصد',
-                                text: ticketViewModel
-                                    .ticket.travelDetail.destination.title,
+                              Expanded(
+                                child: TicketItem(
+                                  title: 'مقصد',
+                                  text: ticketViewModel
+                                      .ticket.travelDetail.destination.title,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TicketItem(
-                                title: 'اتوبوس',
-                                text: ticketViewModel
-                                    .ticket.travelDetail.travel.bus.title,
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TicketItem(
+                                  title: 'اتوبوس',
+                                  text: ticketViewModel
+                                      .ticket.travelDetail.travel.bus.title,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: TicketItem(
-                                title: 'مدل',
-                                text: ticketViewModel.ticket.travelDetail.travel
-                                    .bus.busType.title,
+                              Expanded(
+                                child: TicketItem(
+                                  title: 'مدل',
+                                  text: ticketViewModel.ticket.travelDetail
+                                      .travel.bus.busType.title,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TicketItem(
-                                title: 'پلاک',
-                                text: ticketViewModel
-                                    .ticket.travelDetail.travel.bus.plate,
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TicketItem(
+                                  title: 'پلاک',
+                                  text: ticketViewModel
+                                      .ticket.travelDetail.travel.bus.plate,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: TicketItem(
-                                title: 'راننده',
-                                text: ticketViewModel.ticket.travelDetail.travel
-                                        .driver.firstName +
-                                    ' ' +
-                                    ticketViewModel.ticket.travelDetail.travel
-                                        .driver.lastName,
+                              Expanded(
+                                child: TicketItem(
+                                  title: 'راننده',
+                                  text: ticketViewModel.ticket.travelDetail
+                                          .travel.driver.firstName +
+                                      ' ' +
+                                      ticketViewModel.ticket.travelDetail.travel
+                                          .driver.lastName,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TicketItem(
-                                title: 'قیمت',
-                                text: ticketViewModel.ticket.travelDetail.price
-                                        .toString() +
-                                    ' تومان',
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TicketItem(
+                                  title: 'قیمت',
+                                  text: ticketViewModel
+                                          .ticket.travelDetail.price
+                                          .toString() +
+                                      ' تومان',
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: TicketItem(
-                                title: 'کد پیگیری',
-                                text: ticketViewModel.ticket.qrCode,
+                              Expanded(
+                                child: TicketItem(
+                                  title: 'کد پیگیری',
+                                  text: ticketViewModel.ticket.qrCode,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        QrImage(
-                          data: ticketViewModel.ticket.qrCode,
-                          version: QrVersions.auto,
-                          size: 200.0,
-                        ),
-                        const Spacer(),
-                      ],
+                            ],
+                          ),
+                          const Spacer(),
+                          QrImage(
+                            data: ticketViewModel.ticket.qrCode,
+                            version: QrVersions.auto,
+                            size: 200.0,
+                          ),
+                          const Spacer(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
