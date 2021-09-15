@@ -8,8 +8,13 @@ import 'package:jalali_calendar/jalali_calendar.dart';
 String convertTojalali(String dateTimeGregorian) {
   // print('caonverted dateTimeGregorian date = $dateTimeGregorian');
 
-  var convertedNumber = convertNumbers(dateTimeGregorian);
-  var dateGregorian = dateTimeGregorian.substring(0, 10).split('-');
+  DateTime dateGreg = DateTime.parse(dateTimeGregorian);
+  dateGreg = dateGreg.add(const Duration(hours: 4, minutes: 30));
+
+  String addedTimeZoneDateTime = dateGreg.toString();
+
+  var convertedNumber = convertNumbers(addedTimeZoneDateTime);
+  var dateGregorian = addedTimeZoneDateTime.substring(0, 10).split('-');
 
   Gregorian g = Gregorian(int.parse(dateGregorian[0]),
       int.parse(dateGregorian[1]), int.parse(dateGregorian[2]));
@@ -24,6 +29,17 @@ String convertTojalali(String dateTimeGregorian) {
 randomQrCode(min, max) {
   var rn = Random();
   return min + rn.nextInt(max - min);
+}
+
+String addTimeZoneDiff(String datetime) {
+  DateTime dateGreg = DateTime.parse(datetime);
+  dateGreg = dateGreg.add(const Duration(hours: 4, minutes: 30));
+  print('dateGreg = $dateGreg');
+
+  int hour = dateGreg.hour;
+  int minute = dateGreg.minute;
+
+  return '$hour:$minute';
 }
 
 String convertNumbers(String str) {

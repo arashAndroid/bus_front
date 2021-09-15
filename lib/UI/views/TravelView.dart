@@ -258,8 +258,8 @@ class _TravelViewState extends State<TravelView> {
                               tag: 'time' +
                                   travelViewModel.travelDetail.id.toString(),
                               child: Text(
-                                travelViewModel.travelDetail.departureDatetime
-                                    .substring(11, 16),
+                                addTimeZoneDiff(travelViewModel
+                                    .travelDetail.departureDatetime),
                                 style: const TextStyle(
                                     color: colorTextPrimary,
                                     fontWeight: FontWeight.bold,

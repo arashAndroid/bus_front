@@ -243,7 +243,7 @@ class TravelItem extends StatelessWidget {
                                 travelDetail.id.toString() +
                                 (ticket == null ? '' : ticket.id.toString()),
                             child: Text(
-                              travelDetail.departureDatetime.substring(11, 16),
+                              addTimeZoneDiff(travelDetail.departureDatetime),
                               style: const TextStyle(
                                   color: colorTextPrimary,
                                   fontWeight: FontWeight.bold,

@@ -168,9 +168,10 @@ class _TicketViewState extends State<TicketView> {
                                   Expanded(
                                     child: TicketItem(
                                       title: 'تاریخ حرکت',
-                                      text: ticketViewModel.ticket.travelDetail
-                                              .departureDatetime
-                                              .substring(11, 16) +
+                                      text: addTimeZoneDiff(ticketViewModel
+                                              .ticket
+                                              .travelDetail
+                                              .departureDatetime) +
                                           ' - ' +
                                           convertTojalali(ticketViewModel.ticket
                                               .travelDetail.departureDatetime),
